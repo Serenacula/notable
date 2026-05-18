@@ -4,9 +4,8 @@
 import * as _ from 'lodash';
 import {BrowserWindowConstructorOptions, Event, ipcMain as ipc, BrowserWindow, Menu, MenuItemConstructorOptions, shell} from 'electron';
 import {is} from 'electron-util';
-import * as windowStateKeeper from 'electron-window-state';
+import windowStateKeeper from 'electron-window-state';
 import * as fs from 'fs';
-import * as mkdirp from 'mkdirp';
 import * as path from 'path';
 import pkg from '@root/package.json';
 import Environment from '@common/environment';
@@ -261,7 +260,7 @@ class Main extends Route {
           { role: 'cut' },
           { role: 'copy' },
           { role: 'paste' },
-          { role: 'pasteandmatchstyle' },
+          { role: 'pasteAndMatchStyle' },
           { role: 'delete' },
           { role: 'selectall' },
           {
@@ -593,17 +592,15 @@ class Main extends Route {
 
   ___navigateUrl = () => {
 
-    this.win.webContents.on ( 'new-window', this.__navigateUrl );
+    this.win.webContents.setWindowOpenHandler ( ({ url }) => {
 
-  }
+      if ( url !== this.win.webContents.getURL () ) {
+        shell.openExternal ( url );
+      }
 
-  __navigateUrl = ( event: Event, url: string ) => {
+      return { action: 'deny' };
 
-    if ( url === this.win.webContents.getURL () ) return;
-
-    event.preventDefault ();
-
-    shell.openExternal ( url );
+    });
 
   }
 
@@ -620,13 +617,15 @@ class Main extends Route {
     const win = new BrowserWindow ({
       show: false,
       webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true,
         webSecurity: false
       }
     });
 
     if ( options.html ) {
 
-      win.loadURL ( `data:text/html;base64,${Buffer.from ( options.html ).toString ( 'base64' )}` ); //FIXME: https://github.com/electron/electron/issues/18093
+      win.loadURL ( `data:text/html;base64,${Buffer.from ( options.html ).toString ( 'base64' )}` );
 
     } else if ( options.src ) {
 
@@ -638,28 +637,21 @@ class Main extends Route {
 
     }
 
-    const optionsPDF = {
-      printBackground: true
-    };
+    win.webContents.on ( 'did-finish-load', async () => {
 
-    win.webContents.on ( 'did-finish-load', () => {
-      win.webContents.printToPDF ( optionsPDF, ( err, data ) => {
-        if ( err ) return console.error ( err );
-        fs.writeFile ( options.dst, data, err => {
-          if ( err ) {
-            if ( err.code === 'ENOENT' ) {
-              mkdirp ( path.dirname ( options.dst ), ( err: Error ) => {
-                if ( err ) return console.error ( err );
-                fs.writeFile ( options.dst, data, err => {
-                  if ( err ) return console.error ( err );
-                });
-              });
-            } else {
-              return console.error ( err );
-            }
-          }
-        });
-      });
+      try {
+
+        const data = await win.webContents.printToPDF ({ printBackground: true });
+
+        await fs.promises.mkdir ( path.dirname ( options.dst ), { recursive: true } );
+        await fs.promises.writeFile ( options.dst, data );
+
+      } catch ( err ) {
+
+        console.error ( err );
+
+      }
+
     });
 
   }

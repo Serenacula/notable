@@ -3,43 +3,33 @@
   "productName": "Notable",
   "description": "The markdown-based note-taking app that doesn't suck.",
   "version": "1.5.1",
+  "main": "out/main/index.js",
   "scripts": {
-    "clean:deps": "npx del 'node_modules/**/{README,LICENSE,license,.travis.yml,tsconfig.json,*.{md,MD,map,png,ts}}' 'node_modules/monaco-editor/{dev,min}' '!node_modules/**/*.d.ts'",
-    "clean:dist": "npx del dist",
+    "clean:dist": "npx del out",
     "clean:releases": "npx del releases",
     "clean": "npm run clean:dist && npm run clean:releases",
-    "compile": "npm run svelto:prod && npm run iconfont && npm run tutorial && npm run clean:deps && electron-webpack app --env.minify=false",
+    "compile": "npm run svelto:prod && npm run iconfont && npm run tutorial && electron-vite build",
     "build:mac": "npm run compile && electron-builder --mac",
     "build:win": "npm run compile && electron-builder --win && npm run script:build:fixlatestwin",
     "build:linux": "npm run compile && electron-builder --linux && npm run script:build:fixlatestlinux",
     "build:all": "npm run clean:releases && npm run compile && electron-builder -mwl && npm run script:build:fixlatestwin && npm run script:build:fixlatestlinux",
     "script:build:fixlatestlinux": "node -e \"require ( './scripts/build/fix_latest_linux' )()\"",
     "script:build:fixlatestwin": "node -e \"require ( './scripts/build/fix_latest_win' )()\"",
-    "svelto:dev": "svelto build --env development",
-    "svelto:dev:watch": "npm run svelto:dev && svelto watch --env development",
-    "svelto:prod": "svelto build",
-    "iconfont": "icon-font-buildr",
+    "svelto:prod": "node scripts/build/build_svelto.mjs",
+    "iconfont": "node scripts/build/build_font.mjs",
     "comparison": "wkhtmltoimage --quiet --quality 30 --encoding 'UTF-8' --zoom 2 ./resources/comparison/table.html ./resources/comparison/table.png",
     "tutorial": "cd ./resources/tutorial && zip -FS -r ../../src/renderer/template/dist/tutorial.zip . -x '*.DS_Store'",
-    "monaco": "webpack --config ./webpack.monaco.js",
-    "dev": "electron-webpack dev",
+    "dev": "npm run svelto:prod && electron-vite dev",
     "prod": "npm run compile && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac dir && open releases/mac/*.app"
-  },
-  "electronWebpack": {
-    "staticSourceDirectory": "src/renderer/template/dist",
-    "main": {
-      "webpackConfig": "webpack.js"
-    },
-    "renderer": {
-      "template": "src/renderer/index.html",
-      "webpackConfig": "webpack.js"
-    }
   },
   "build": {
     "appId": "com.fabiospampinato.notable",
     "copyright": "Copyright © 2018-present Fabio Spampinato",
     "afterAllArtifactBuild": "scripts/build/hook_after_build.js",
     "afterPack": "scripts/build/hook_after_pack.js",
+    "files": [
+      "out/**"
+    ],
     "directories": {
       "output": "releases"
     },
@@ -181,12 +171,14 @@
     "string-matches": "^1.1.3",
     "tiny-glob": "^0.2.6"
   },
+  "overrides": {
+    "caporal": "1.3.0",
+    "gulp-if": "2.0.2"
+  },
   "optionalDependencies": {
     "fsevents": "^1.2.9"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.0.0",
-    "@hot-loader/react-dom": "^16.8.6",
     "@types/chokidar": "^2.1.3",
     "@types/diff": "^4.0.2",
     "@types/electron-devtools-installer": "^2.2.0",
@@ -202,22 +194,21 @@
     "@types/react": "^16.8.16",
     "@types/react-dom": "^16.8.4",
     "@types/react-window": "^1.8.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.3.0",
     "cash-dom": "^4.1.1",
     "del-cli": "^1.1.0",
-    "electron": "^5.0.1",
-    "electron-builder": "^20.39.0",
+    "electron": "^42.0.0",
+    "electron-builder": "^26.0.0",
     "electron-builder-squirrel-windows": "^20.40.0",
     "electron-devtools-installer": "^2.2.4",
-    "electron-webpack": "git://github.com/fabiospampinato/electron-webpack.git#package-electron-webpack",
-    "electron-webpack-ts": "^3.1.1",
+    "electron-vite": "^2.3.0",
     "execa": "^1.0.0",
-    "icon-font-buildr": "^1.3.3",
-    "react-hot-loader": "^4.8.4",
     "react-log-updates": "^1.0.7",
-    "svelto": "^1.1.11",
-    "terser-webpack-plugin": "^1.2.3",
-    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "sass": "^1.86.0",
+    "svg2ttf": "^6.0.3",
+    "svgicons2svgfont": "^15.0.1",
     "typescript": "^3.4.5",
-    "webpack": "^4.30.0"
+    "wawoff2": "^2.0.1"
   }
 }

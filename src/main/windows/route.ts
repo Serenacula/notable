@@ -20,16 +20,14 @@ class Route extends Window {
     const route = this.name,
           theme = Settings.get ( 'theme' );
 
-    if ( Environment.isDevelopment ) {
+    if ( Environment.rendererUrl ) {
 
-      const {protocol, hostname, port} = Environment.wds;
-
-      this.win.loadURL ( `${protocol}://${hostname}:${port}?route=${route}&theme=${theme}` );
+      this.win.loadURL ( `${Environment.rendererUrl}?route=${route}&theme=${theme}` );
 
     } else {
 
       this.win.loadURL ( formatURL ({
-        pathname: path.join ( __dirname, 'index.html' ),
+        pathname: path.join ( __dirname, '..', 'renderer', 'index.html' ),
         protocol: 'file',
         slashes: true,
         query: {

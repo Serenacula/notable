@@ -6,27 +6,21 @@ import '@static/javascript/notable.min.js';
 
 import * as React from 'react';
 import {render as renderDOM} from 'react-dom';
-import Identity from 'react-component-identity';
 import {Router} from 'react-router-static';
 import {Provider} from 'overstated';
-import Environment from '@common/environment';
 import Routes from './routes';
 import ErrorBoundary from './components/error_boundary';
 
 /* RENDER */
 
-async function render () {
-
-  const AppContainer = Environment.isDevelopment ? ( await import ( 'react-hot-loader' ) ).AppContainer : Identity;
+function render () {
 
   renderDOM (
-    <AppContainer>
-      <Provider>
-        <ErrorBoundary>
-          <Router routes={Routes} />
-        </ErrorBoundary>
-      </Provider>
-    </AppContainer>,
+    <Provider>
+      <ErrorBoundary>
+        <Router routes={Routes} />
+      </ErrorBoundary>
+    </Provider>,
     document.getElementsByClassName ( 'app' )[0]
   );
 

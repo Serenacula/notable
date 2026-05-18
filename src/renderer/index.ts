@@ -8,13 +8,3 @@ import render from './render';
 
 debugging ();
 render ();
-
-/* HOT MODULE REPLACEMENT */
-
-if ( module.hot ) {
-
-  module.hot.accept ( './render', () => {
-    require ( './render' ).default ();
-  });
-
-}

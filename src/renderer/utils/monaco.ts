@@ -6,7 +6,6 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
 import {Command, EditorCommand} from 'monaco-editor/esm/vs/editor/browser/editorExtensions.js';
 import {EditorContextKeys} from 'monaco-editor/esm/vs/editor/common/editorContextKeys.js';
 import * as LanguageMarkdown from 'monaco-editor/esm/vs/basic-languages/markdown/markdown.js';
-import * as path from 'path';
 import Settings from '@common/settings';
 import ThemeLight from './monaco_light';
 import ThemeDark from './monaco_dark';
@@ -244,9 +243,11 @@ const Monaco = {
 
   initEnvironment () {
 
+    // Worker will be wired up properly when Monaco is upgraded (Phase 4).
+    // Monaco falls back to running on the main thread without a worker.
     self['MonacoEnvironment'] = {
       getWorkerUrl () {
-        return `file://${path.join ( __static, 'javascript', 'monaco.worker.js' )}`;
+        return URL.createObjectURL ( new Blob ( [''], { type: 'application/javascript' } ) );
       }
     };
 

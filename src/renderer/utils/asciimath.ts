@@ -2,7 +2,7 @@
 /* IMPORT */
 
 import * as _ from 'lodash';
-import asciimath2tex from 'asciimath2tex/asciimath2tex.js';
+import asciimath2tex from 'asciimath2tex';
 
 /* ASCIIMATH */
 
