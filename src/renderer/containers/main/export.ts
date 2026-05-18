@@ -3,7 +3,7 @@
 
 import * as _ from 'lodash';
 import critically from 'critically';
-import {ipcRenderer as ipc, remote} from 'electron';
+import {ipcRenderer as ipc} from 'electron';
 import Dialog from 'electron-dialog';
 import * as mime from 'mime-types';
 import * as os from 'os';
@@ -161,7 +161,7 @@ class Export extends Container<ExportState, MainCTX> {
 
     if ( !renderer || !extension ) return Dialog.alert ( 'Invalid export configuration' );
 
-    const basePath = this.dialog ();
+    const basePath = await this.dialog ();
 
     if ( !basePath ) return;
 
@@ -222,11 +222,11 @@ class Export extends Container<ExportState, MainCTX> {
 
   }
 
-  dialog = () => {
+  dialog = async (): Promise<string | undefined> => {
 
-    const folderPaths = remote.dialog.showOpenDialog ({
+    const folderPaths: string[] = await ipc.invoke ( 'dialog:show-open-dialog', {
       title: 'Export Notes',
-      buttonLabel : 'Export',
+      buttonLabel: 'Export',
       properties: ['openDirectory', 'createDirectory'],
       defaultPath: os.homedir ()
     });

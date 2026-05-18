@@ -60,7 +60,7 @@ class Attachment extends Container<AttachmentState, MainCTX> {
 
     if ( !attachment ) return Dialog.alert ( 'This attachment is no longer stored in disk' );
 
-    return shell.openItem ( attachment.filePath );
+    shell.openPath ( attachment.filePath );
 
   }
 

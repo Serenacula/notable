@@ -1,7 +1,6 @@
 
 /* IMPORT */
 
-import {remote} from 'electron';
 import {Container, autosuspend} from 'overstated';
 
 /* WINDOW */
@@ -12,7 +11,7 @@ class Window extends Container<WindowState, MainCTX> {
 
   state = {
     focus: false,
-    fullscreen: remote.getCurrentWindow ().isFullScreen (),
+    fullscreen: false,
     sidebar: true,
     zen: false
   };

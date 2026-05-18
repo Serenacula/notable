@@ -1,7 +1,7 @@
 
 /* IMPORT */
 
-import {app, ipcMain as ipc, Event, Menu, MenuItemConstructorOptions, shell} from 'electron';
+import {app, BrowserWindow, dialog, ipcMain as ipc, Event, Menu, MenuItemConstructorOptions, shell} from 'electron';
 import {autoUpdater as updater} from 'electron-updater';
 import {enforceMacOSAppLocation, is} from 'electron-util';
 import * as fs from 'fs';
@@ -37,10 +37,23 @@ class App {
 
     this.initContextMenu ();
     this.initMenu ();
+    this.initDialogHandlers ();
 
   }
 
   initContextMenu () {}
+
+  initDialogHandlers () {
+
+    ipc.handle ( 'dialog:show-open-dialog', async ( event, options ) => {
+
+      const win = BrowserWindow.fromWebContents ( event.sender ) ?? undefined;
+      const { filePaths } = await dialog.showOpenDialog ( win as BrowserWindow, options );
+      return filePaths;
+
+    });
+
+  }
 
   initMenu () {
 
@@ -164,11 +177,11 @@ class App {
 
   }
 
-  __ready = () => {
+  __ready = async () => {
 
     enforceMacOSAppLocation ();
 
-    this.initDebug ();
+    await this.initDebug ();
 
     this.load ();
 
@@ -222,7 +235,8 @@ class App {
 
     }
 
-    updater.checkForUpdatesAndNotify ();
+    // TODO: configure for fork releases before re-enabling
+    // updater.checkForUpdatesAndNotify ();
 
   }
 

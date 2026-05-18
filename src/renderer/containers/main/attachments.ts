@@ -4,7 +4,7 @@
 import * as _ from 'lodash';
 import CallsBatch from 'calls-batch';
 import watcher from 'chokidar-watcher';
-import {remote} from 'electron';
+import {ipcRenderer as ipc} from 'electron';
 import glob from 'tiny-glob';
 import {Container, autosuspend} from 'overstated';
 import Config from '@common/config';
@@ -143,9 +143,9 @@ class Attachments extends Container<AttachmentsState, MainCTX> {
 
   }
 
-  dialog = (): string[] => {
+  dialog = async (): Promise<string[]> => {
 
-    const filePaths = remote.dialog.showOpenDialog ({
+    const filePaths: string[] = await ipc.invoke ( 'dialog:show-open-dialog', {
       title: 'Select Files to Add',
       buttonLabel: 'Add',
       properties: ['openFile', 'multiSelections'],

@@ -1,7 +1,7 @@
 
 /* IMPORT */
 
-import {remote} from 'electron';
+import {ipcRenderer as ipc} from 'electron';
 import Dialog from 'electron-dialog';
 import {Container, autosuspend} from 'overstated';
 import * as path from 'path';
@@ -124,15 +124,15 @@ class Import extends Container<ImportState, MainCTX> {
 
   select = async () => {
 
-    const filePaths = this.dialog ();
+    const filePaths = await this.dialog ();
 
     return this.import ( filePaths );
 
   }
 
-  dialog = (): string[] => {
+  dialog = async (): Promise<string[]> => {
 
-    const filePaths = remote.dialog.showOpenDialog ({
+    const filePaths: string[] = await ipc.invoke ( 'dialog:show-open-dialog', {
       title: 'Import Notes',
       buttonLabel: 'Import',
       filters: [

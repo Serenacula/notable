@@ -1,7 +1,7 @@
 
 /* IMPORT */
 
-import {ipcRenderer as ipc, remote, shell} from 'electron';
+import {ipcRenderer as ipc, shell} from 'electron';
 import Dialog from 'electron-dialog';
 import * as fs from 'fs';
 import * as mkdirp from 'mkdirp';
@@ -72,9 +72,9 @@ class CWD extends Container<CWDState, CWDCTX> {
 
   }
 
-  select = () => {
+  select = async () => {
 
-    const folderPath = this.dialog ();
+    const folderPath = await this.dialog ();
 
     if ( !folderPath ) return;
 
@@ -96,16 +96,16 @@ class CWD extends Container<CWDState, CWDCTX> {
 
     if ( !cwd ) return Dialog.alert ( 'No data directory set' );
 
-    shell.openItem ( cwd );
+    shell.openPath ( cwd );
 
   }
 
-  dialog = (): string | undefined => {
+  dialog = async (): Promise<string | undefined> => {
 
     const cwd = Config.cwd,
           defaultPath = cwd ? path.dirname ( cwd ) : os.homedir ();
 
-    const folderPaths = remote.dialog.showOpenDialog ({
+    const folderPaths: string[] = await ipc.invoke ( 'dialog:show-open-dialog', {
       title: 'Select Data Directory',
       buttonLabel: 'Select',
       properties: ['openDirectory', 'createDirectory', 'showHiddenFiles'],

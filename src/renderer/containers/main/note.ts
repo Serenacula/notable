@@ -318,7 +318,7 @@ class Note extends Container<NoteState, MainCTX> {
 
     if ( !attachmentsPath ) return;
 
-    if ( !filePaths ) filePaths = this.ctx.attachments.dialog ();
+    if ( !filePaths ) filePaths = await this.ctx.attachments.dialog ();
 
     if ( !filePaths.length ) return;
 
@@ -548,7 +548,7 @@ class Note extends Container<NoteState, MainCTX> {
 
     if ( !note ) return Dialog.alert ( 'This note is no longer stored in disk' );
 
-    return shell.openItem ( note.filePath );
+    shell.openPath ( note.filePath );
 
   }
 
