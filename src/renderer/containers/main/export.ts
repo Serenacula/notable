@@ -66,7 +66,7 @@ class Export extends Container<ExportState, MainCTX> {
         `${__static}/css/notable.min.css`
       ]);
 
-      let content = Markdown.render ( note.plainContent, Infinity ),
+      let content = Markdown.render ( note.plainContent ),
           metadata: string[] = [];
 
       if ( options.metadata ) {

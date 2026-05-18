@@ -29,6 +29,7 @@ const config = defineConfig ({
     publicDir: resolve ( 'src/renderer/template/dist' ),
     build: {
       rollupOptions: {
+        external: ['fsevents'],
         input: {
           index: resolve ( 'src/renderer/index.html' )
         }
