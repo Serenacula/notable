@@ -4,11 +4,9 @@
 import {ipcRenderer as ipc, shell} from 'electron';
 import Dialog from 'electron-dialog';
 import * as fs from 'fs';
-import * as mkdirp from 'mkdirp';
 import * as os from 'os';
 import {Container, autosuspend, compose} from 'overstated';
 import * as path from 'path';
-import * as pify from 'pify';
 import Config from '@common/config';
 import Settings from '@common/settings';
 import Tutorial from '@renderer/containers/main/tutorial';
@@ -44,9 +42,9 @@ class CWD extends Container<CWDState, CWDCTX> {
 
       const hadTutorial = !!Settings.get ( 'tutorial' );
 
-      await pify ( mkdirp )( folderPath );
+      await fs.promises.mkdir ( folderPath, { recursive: true } );
 
-      await pify ( fs.access )( folderPath, fs.constants.F_OK );
+      await fs.promises.access ( folderPath, fs.constants.F_OK );
 
       Settings.set ( 'cwd', folderPath );
 

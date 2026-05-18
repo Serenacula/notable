@@ -2,6 +2,7 @@
 /* IMPORT */
 
 import * as _ from 'lodash';
+import * as crypto from 'crypto';
 import critically from 'critically';
 import {ipcRenderer as ipc} from 'electron';
 import Dialog from 'electron-dialog';
@@ -10,7 +11,6 @@ import * as os from 'os';
 import {Container, autosuspend} from 'overstated';
 import * as path from 'path';
 import stringMatches from 'string-matches';
-import * as sha1 from 'sha1';
 import File from '@renderer/utils/file';
 import Markdown from '@renderer/utils/markdown';
 import Path from '@renderer/utils/path';
@@ -165,7 +165,7 @@ class Export extends Container<ExportState, MainCTX> {
 
     if ( !basePath ) return;
 
-    const exportId = sha1 ( Date.now ().toString () ).slice ( 0, 4 ),
+    const exportId = crypto.createHash ( 'sha1' ).update ( Date.now ().toString () ).digest ( 'hex' ).slice ( 0, 4 ),
           exportName = `Notable - Export ${exportId}`,
           {filePath: exportPath} = await Path.getAllowedPath ( basePath, exportName ),
           notesPath = exportPath,

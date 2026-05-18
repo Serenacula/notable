@@ -3,10 +3,9 @@
 
 import {shell} from 'electron';
 import Dialog from 'electron-dialog';
-import * as unzip from 'extract-zip';
+import unzip from 'extract-zip';
 import {Container, autosuspend} from 'overstated';
 import * as path from 'path';
-import * as pify from 'pify';
 import pkg from '@root/package.json';
 import Config from '@common/config';
 
@@ -36,7 +35,7 @@ class Tutorial extends Container<TutorialState, MainCTX> {
 
     try {
 
-      await pify ( unzip )( tutorialPath, { dir: cwd } );
+      await unzip ( tutorialPath, { dir: cwd } );
 
     } catch ( e ) {
 

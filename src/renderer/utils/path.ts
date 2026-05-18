@@ -4,7 +4,6 @@
 import * as filenamify from 'filenamify';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as pify from 'pify';
 
 /* PATH */
 
@@ -45,7 +44,7 @@ const Path = {
 
       try {
 
-        await pify ( fs.access )( filePath );
+        await fs.promises.access ( filePath );
 
       } catch ( e ) {
 
