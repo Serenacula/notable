@@ -4,7 +4,7 @@
 import * as _ from 'lodash';
 import * as CRC32 from 'crc-32';
 import {AllHtmlEntities as entities} from 'html-entities';
-import * as isAbsoluteUrl from 'is-absolute-url';
+import isAbsoluteUrl from 'is-absolute-url';
 import MarkdownIt from 'markdown-it';
 import taskLists from 'markdown-it-task-lists';
 import * as path from 'path';
@@ -29,7 +29,7 @@ function renderKaTeX ( tex: string, displayMode: boolean ): string {
   try {
     return katex.renderToString ( tex, { ...Config.katex, displayMode } );
   } catch ( e ) {
-    console.error ( `[katex] ${e.message}` );
+    console.error ( `[katex] ${(e as Error).message}` );
     return displayMode ? `$$${tex}$$` : `$${tex}$`;
   }
 }
@@ -39,7 +39,7 @@ function renderAsciiMathToKaTeX ( asciimath: string, displayMode: boolean ): str
     const tex = AsciiMath.toTeX ( asciimath );
     return renderKaTeX ( tex, displayMode );
   } catch ( e ) {
-    console.error ( `[asciimath] ${e.message}` );
+    console.error ( `[asciimath] ${(e as Error).message}` );
     return displayMode ? `&&${asciimath}&&` : `&${asciimath}&`;
   }
 }
@@ -81,7 +81,7 @@ md.renderer.rules.fence = ( tokens, idx, options, env, self ) => {
     return renderAsciiMathToKaTeX ( entities.decode ( content ), true );
   }
 
-  const resolvedLang = Highlighter.languagesAliases[lang] || lang;
+  const resolvedLang = (Highlighter.languagesAliases as Record<string, string>)[lang] || lang;
   const highlighted = lang ? Highlighter.highlight ( content, lang ) : '';
   const codeContent = highlighted || md.utils.escapeHtml ( content );
   const langAttr = lang ? ` class="language-${resolvedLang}"` : '';

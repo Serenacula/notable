@@ -8,7 +8,7 @@ import pkg from '@root/package.json';
 
 /* ERROR BOUNDARY */
 
-class ErrorBoundary extends React.Component<{}, { error?: Error }> {
+class ErrorBoundary extends React.Component<{ children?: React.ReactNode }, { error?: Error }> {
 
   /* STATE */
 

@@ -218,13 +218,13 @@ type MainState = {
 type MainCTX = {
   _prevFlags?: ContextFlags,
   state: MainState,
-  suspend (),
-  unsuspend (),
-  suspendMiddlewares (),
-  unsuspendMiddlewares (),
-  refresh (),
-  listen (),
-  waitIdle (),
+  suspend (): Promise<void>,
+  unsuspend (): Promise<void>,
+  suspendMiddlewares (): Promise<void>,
+  unsuspendMiddlewares (): Promise<void>,
+  refresh (): Promise<void>,
+  listen (): void,
+  waitIdle (): Promise<void>,
   attachment: import ( '@renderer/containers/main/attachment' ).default,
   attachments: import ( '@renderer/containers/main/attachments' ).default,
   clipboard: import ( '@renderer/containers/main/clipboard' ).default,
@@ -255,12 +255,12 @@ type IMain = MainCTX & { ctx: MainCTX };
 type CWDState = {};
 
 type CWDCTX = {
-  get (),
-  set (),
-  select (),
-  selectDefault (),
-  openInApp (),
-  dialog (),
+  get (): string | undefined,
+  set (): Promise<void>,
+  select (): Promise<void>,
+  selectDefault (): Promise<void>,
+  openInApp (): Promise<void>,
+  dialog (): Promise<void>,
   tutorial: import ( '@renderer/containers/main/tutorial' ).default
 };
 

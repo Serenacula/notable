@@ -6,7 +6,7 @@ import List from './list';
 
 /* KEYED LIST */
 
-const KeyedList = ( props ) => (
+const KeyedList = ( props: any ) => (
   <List {...props} isKeyed={true} />
 );
 

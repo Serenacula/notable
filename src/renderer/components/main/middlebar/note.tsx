@@ -7,11 +7,11 @@ import Main from '@renderer/containers/main';
 
 /* NOTE */
 
-const Note = ({ note, style, title, hasAttachments, isActive, isDeleted, isFavorited, isPinned, isSelected, isMultiEditorEditing, set, toggleNote, toggleNoteRange }) => {
+const Note = ({ note, style, title, hasAttachments, isActive, isDeleted, isFavorited, isPinned, isSelected, isMultiEditorEditing, set, toggleNote, toggleNoteRange }: { note: NoteObj | undefined; style: React.CSSProperties; title: string; hasAttachments: boolean; isActive: boolean; isDeleted: boolean; isFavorited: boolean; isPinned: boolean; isSelected: boolean; isMultiEditorEditing: boolean; set: (...args: any[]) => void; toggleNote: (...args: any[]) => void; toggleNoteRange: (...args: any[]) => void }) => {
 
   if ( !note ) return null;
 
-  const onClick = event => Svelto.Keyboard.keystroke.hasCtrlOrCmd ( event ) ? toggleNote ( note ) : ( event.shiftKey ? toggleNoteRange ( note ) : set ( note, true ) );
+  const onClick = ( event: React.MouseEvent ) => Svelto.Keyboard.keystroke.hasCtrlOrCmd ( event ) ? toggleNote ( note ) : ( event.shiftKey ? toggleNoteRange ( note ) : set ( note, true ) );
 
   return (
     <div style={style} className={`note ${!isMultiEditorEditing && isActive ? 'label' : 'button'} ${( isMultiEditorEditing ? isSelected : isActive ) ? 'active' : ''} list-item`} data-checksum={note.checksum} data-filepath={note.filePath} data-deleted={isDeleted} data-favorited={isFavorited} onClick={onClick}>

@@ -47,9 +47,9 @@ class Mermaid extends Route {
           { role: 'cut' },
           { role: 'copy' },
           { role: 'paste' },
-          { role: 'pasteandmatchstyle' },
+          { role: 'pasteAndMatchStyle' },
           { role: 'delete' },
-          { role: 'selectall' },
+          { role: 'selectAll' },
           {
             type: 'separator',
             visible: is.macos
@@ -57,8 +57,8 @@ class Mermaid extends Route {
           {
             label: 'Speech',
             submenu: [
-              { role: 'startspeaking' },
-              { role: 'stopspeaking' }
+              { role: 'startSpeaking' },
+              { role: 'stopSpeaking' }
             ],
             visible: is.macos
           }
@@ -72,16 +72,16 @@ class Mermaid extends Route {
             visible: Environment.isDevelopment
           },
           {
-            role: 'forcereload',
+            role: 'forceReload',
             visible: Environment.isDevelopment
           },
           {
             type: 'separator',
             visible: Environment.isDevelopment
           },
-          { role: 'resetzoom' },
-          { role: 'zoomin' },
-          { role: 'zoomout' }
+          { role: 'resetZoom' },
+          { role: 'zoomIn' },
+          { role: 'zoomOut' }
         ]
       },
       {

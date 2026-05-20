@@ -226,7 +226,7 @@ class Note extends Container<NoteState, MainCTX> {
 
       const loop = () => {
 
-        if ( iteration++ >= 1000 ) return resolve (); // Something unexpected probably happened, stop checking
+        if ( iteration++ >= 1000 ) return resolve ( undefined ); // Something unexpected probably happened, stop checking
 
         const note = this.get ( filePath );
 
@@ -621,16 +621,16 @@ class Note extends Container<NoteState, MainCTX> {
 
     const metadata = _.clone ( note.metadata );
 
-    delete metadata.stat;
+    delete (metadata as any).stat;
 
     metadata.created = metadata.created.toISOString () as any;
     metadata.modified = modified.toISOString () as any;
 
-    if ( !this.getAttachments ( note ).length ) delete metadata.attachments;
-    if ( !this.getTags ( note ).length ) delete metadata.tags;
-    if ( !this.isDeleted ( note ) ) delete metadata.deleted;
-    if ( !this.isFavorited ( note ) ) delete metadata.favorited;
-    if ( !this.isPinned ( note ) ) delete metadata.pinned;
+    if ( !this.getAttachments ( note ).length ) delete (metadata as any).attachments;
+    if ( !this.getTags ( note ).length ) delete (metadata as any).tags;
+    if ( !this.isDeleted ( note ) ) delete (metadata as any).deleted;
+    if ( !this.isFavorited ( note ) ) delete (metadata as any).favorited;
+    if ( !this.isPinned ( note ) ) delete (metadata as any).pinned;
 
     note.content = Metadata.set ( note.plainContent, metadata );
 

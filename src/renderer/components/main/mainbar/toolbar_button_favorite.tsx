@@ -8,7 +8,7 @@ import ToolbarButton from './toolbar_button';
 
 /* TOOLBAR BUTTON FAVORITE */
 
-const FavoriteButton = ({ isFavorited, toggleFavorite }) => {
+const FavoriteButton = ({ isFavorited, toggleFavorite }: { isFavorited: boolean; toggleFavorite: () => void }) => {
 
   if ( !isFavorited ) return <ToolbarButton icon="star_outline" title="Favorite" onClick={() => toggleFavorite ()} />
 

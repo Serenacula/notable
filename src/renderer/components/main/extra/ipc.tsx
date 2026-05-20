@@ -1,7 +1,7 @@
 
 /* IMPORT */
 
-import {ipcRenderer as ipc, IpcMessageEvent} from 'electron';
+import {ipcRenderer as ipc, IpcRendererEvent} from 'electron';
 import {connect} from 'overstated';
 import {Component} from 'react-component-renderless';
 import CWD from '@renderer/containers/cwd';
@@ -177,7 +177,7 @@ class IPC extends Component<{ containers: [IMain, ICWD]}, {}> {
 
   }
 
-  __windowFullscreenSet = ( event: IpcMessageEvent, isFullscreen?: boolean ) => {
+  __windowFullscreenSet = ( event: IpcRendererEvent, isFullscreen?: boolean ) => {
 
     this.main.window.toggleFullscreen ( isFullscreen );
 
@@ -297,7 +297,7 @@ class IPC extends Component<{ containers: [IMain, ICWD]}, {}> {
 
   }
 
-  __quickPanelToggle = ( event: IpcMessageEvent, force?: boolean ) => {
+  __quickPanelToggle = ( event: IpcRendererEvent, force?: boolean ) => {
 
     this.main.quickPanel.toggleOpen ( force );
 
@@ -333,7 +333,7 @@ class IPC extends Component<{ containers: [IMain, ICWD]}, {}> {
 
   }
 
-  __themeSet = ( event: IpcMessageEvent, theme: string ) => {
+  __themeSet = ( event: IpcRendererEvent, theme: string ) => {
 
     this.main.theme.set ( theme );
 

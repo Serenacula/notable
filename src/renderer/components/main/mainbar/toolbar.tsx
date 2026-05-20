@@ -17,7 +17,7 @@ import TrashPermanentlyButton from './toolbar_button_trash_permanently';
 
 /* TOOLBAR */
 
-const Toolbar = ({ hasNote, isFocus, isFullscreen, isZen, isSplit }) => {
+const Toolbar = ({ hasNote, isFocus, isFullscreen, isZen, isSplit }: { hasNote: boolean; isFocus: boolean; isFullscreen: boolean; isZen: boolean; isSplit: boolean }) => {
 
   if ( isZen ) return is.macos ? <div className="layout-header toolbar"></div> : null;
 

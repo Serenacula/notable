@@ -8,7 +8,7 @@ import Main from '@renderer/containers/main';
 
 /* PREVIEW */
 
-const Preview = ({ content }) => {
+const Preview = ({ content }: { content: string }) => {
 
   const containerRef = React.useRef<HTMLDivElement> ( null );
   const html = Markdown.render ( content );

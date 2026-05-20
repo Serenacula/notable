@@ -14,7 +14,7 @@ import Toolbar from './toolbar';
 
 /* CONTENT */
 
-const Content = ({ hasNote, isLoading, isEditing, isMultiEditing, isSplit }) => {
+const Content = ({ hasNote, isLoading, isEditing, isMultiEditing, isSplit }: { hasNote: boolean; isLoading: boolean; isEditing: boolean; isMultiEditing: boolean; isSplit: boolean }) => {
 
   if ( isLoading || !hasNote ) return <Toolbar />;
 

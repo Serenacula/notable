@@ -10,7 +10,7 @@ import Toolbar from './toolbar';
 
 /* MIDDLEBAR */
 
-const Middlebar = ({ isFocus, isZen }) => {
+const Middlebar = ({ isFocus, isZen }: { isFocus: boolean; isZen: boolean }) => {
 
   if ( isFocus || isZen ) return null;
 

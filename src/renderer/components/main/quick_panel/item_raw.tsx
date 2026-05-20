@@ -7,7 +7,7 @@ import Main from '@renderer/containers/main';
 
 /* ITEM RAW */
 
-const ItemRaw = ({ index = -1, style = {}, className = '', item, isActive, isEmpty, attributes = {} }) => (
+const ItemRaw = ({ index = -1, style = {}, className = '', item, isActive, isEmpty, attributes = {} }: { index?: number; style?: React.CSSProperties; className?: string; item: any; isActive: boolean; isEmpty: boolean; attributes?: Record<string, any> }) => (
   <div className={`list-item ${isActive ? 'active' : ''} ${isEmpty ? 'empty' : ''} button ${className}`} style={style} data-nth={index} {...attributes}>
     {item.icon ? <i className="icon xsmall">{item.icon}</i> : null}
     <span className="title small">{item.title}</span>

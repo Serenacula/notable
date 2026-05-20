@@ -76,7 +76,7 @@ const Monaco = {
           weight: 0
         }
       },
-      handler ( accessor, editor: MonacoEditor ) {
+      handler ( accessor: any, editor: MonacoEditor ) {
         const position0 = {
           lineNumber: 0,
           column: 0
@@ -105,7 +105,7 @@ const Monaco = {
           weight: 100
         }
       },
-      handler ( accessor, editor: MonacoEditor ) {
+      handler ( accessor: any, editor: MonacoEditor ) {
 
         if ( !Monaco.editorOptions.minimap ) Monaco.editorOptions.minimap = {};
 
@@ -127,7 +127,7 @@ const Monaco = {
           weight: 100
         }
       },
-      handler ( accessor, editor: MonacoEditor ) {
+      handler ( accessor: any, editor: MonacoEditor ) {
 
         Monaco.editorOptions.wordWrap = Monaco.editorOptions.wordWrap === 'bounded' ? 'off' : 'bounded';
 
@@ -147,7 +147,7 @@ const Monaco = {
           weight: 100
         }
       },
-      handler ( accessor, editor: MonacoEditor ) {
+      handler ( accessor: any, editor: MonacoEditor ) {
         Todo.toggleTodo ( editor );
       }
     },
@@ -161,7 +161,7 @@ const Monaco = {
           weight: 100
         }
       },
-      handler ( accessor, editor: MonacoEditor ) {
+      handler ( accessor: any, editor: MonacoEditor ) {
         Todo.toggleTodoDone ( editor );
       }
     }
@@ -212,13 +212,13 @@ const Monaco = {
     'toggleFindRegex': false,
     'toggleFindWholeWord': false,
 
-    'editor.action.moveLinesDownAction': cmd => {
+    'editor.action.moveLinesDownAction': ( cmd: any ) => {
       cmd._kbOpts.primary = cmd._kbOpts.linux.primary = monaco.KeyMod.WinCtrl | monaco.KeyMod.Alt | monaco.KeyCode.DownArrow;
       cmd._kbOpts.mac = {};
       cmd._kbOpts.mac.primary = monaco.KeyMod.CtrlCmd | monaco.KeyMod.WinCtrl | monaco.KeyCode.DownArrow;
     },
 
-    'editor.action.moveLinesUpAction': cmd => {
+    'editor.action.moveLinesUpAction': ( cmd: any ) => {
       cmd._kbOpts.primary = cmd._kbOpts.linux.primary = monaco.KeyMod.WinCtrl | monaco.KeyMod.Alt | monaco.KeyCode.UpArrow;
       cmd._kbOpts.mac = {};
       cmd._kbOpts.mac.primary = monaco.KeyMod.CtrlCmd | monaco.KeyMod.WinCtrl | monaco.KeyCode.UpArrow;
@@ -245,7 +245,7 @@ const Monaco = {
 
     // Worker will be wired up properly when Monaco is upgraded (Phase 4).
     // Monaco falls back to running on the main thread without a worker.
-    self['MonacoEnvironment'] = {
+    (self as any)['MonacoEnvironment'] = {
       getWorkerUrl () {
         return URL.createObjectURL ( new Blob ( [''], { type: 'application/javascript' } ) );
       }
@@ -272,13 +272,13 @@ const Monaco = {
           super ( options );
         }
 
-        runEditorCommand ( accessor, editor: MonacoEditor ) {
+        runEditorCommand ( accessor: any, editor: MonacoEditor ) {
           return handler ( accessor, editor );
         }
 
       }
 
-      new CustomCommand ()['register']();
+      (new CustomCommand () as any)['register']();
 
     });
 

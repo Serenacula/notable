@@ -7,7 +7,7 @@ import CWD from '@renderer/containers/cwd';
 
 /* CONTENT */
 
-const Content = ({ select }) => (
+const Content = ({ select }: { select: () => void }) => (
   <>
     <div className="layout-content container sharp centerer">
       <div className="button centered compact circular giant accent z-depth-3" title="Select..." onClick={select}>

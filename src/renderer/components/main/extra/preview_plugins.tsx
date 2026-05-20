@@ -36,7 +36,7 @@ class PreviewPlugins extends Component<{ container: IMain }, {}> {
 
   /* HANDLERS */
 
-  __noteClick = ( event ) => {
+  __noteClick = ( event: any ) => {
 
     const filePath = $(event.currentTarget).data ( 'filepath' ),
           note = this.props.container.note.get ( filePath );
@@ -61,7 +61,7 @@ class PreviewPlugins extends Component<{ container: IMain }, {}> {
 
   }
 
-  __tagClick = ( event ) => {
+  __tagClick = ( event: any ) => {
 
     const tag = $(event.currentTarget).data ( 'tag' );
 
@@ -71,7 +71,7 @@ class PreviewPlugins extends Component<{ container: IMain }, {}> {
 
   }
 
-  __checkboxClick = ( event ) => {
+  __checkboxClick = ( event: any ) => {
 
     const $input = $(event.currentTarget),
           checked = $input.prop ( 'checked' ),
@@ -83,7 +83,7 @@ class PreviewPlugins extends Component<{ container: IMain }, {}> {
 
   }
 
-  __copyClick = ( event ) => {
+  __copyClick = ( event: any ) => {
 
     const $btn = $(event.currentTarget),
           $code = $btn.next ( 'pre' ).find ( 'code' );
@@ -94,7 +94,7 @@ class PreviewPlugins extends Component<{ container: IMain }, {}> {
 
   }
 
-  __mermaidOpenExternalClick = ( event ) => {
+  __mermaidOpenExternalClick = ( event: any ) => {
 
     const $btn = $(event.currentTarget),
           $svg = $btn.next ( 'svg' );

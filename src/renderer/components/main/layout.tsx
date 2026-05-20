@@ -7,9 +7,9 @@ import Utils from '@renderer/utils/utils';
 
 /* LAYOUT */
 
-class Layout extends React.Component<{ resizable: boolean, direction: string, className?: string, isFocus?: boolean, isZen?: boolean, hasSidebar?: boolean }, {}> {
+class Layout extends React.Component<{ resizable: boolean; direction: string; className?: string; isFocus?: boolean; isZen?: boolean; hasSidebar?: boolean; children?: React.ReactNode }, {}> {
 
-  $layout;
+  $layout: any;
   dimensions?: number[];
 
   update = async () => {

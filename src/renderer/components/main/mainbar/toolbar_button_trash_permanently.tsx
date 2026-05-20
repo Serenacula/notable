@@ -8,7 +8,7 @@ import ToolbarButton from './toolbar_button';
 
 /* TOOLBAR BUTTON TRASH PERMANENTLY */
 
-const TrashPermanentlyButton = ({ isDeleted, del }) => {
+const TrashPermanentlyButton = ({ isDeleted, del }: { isDeleted: boolean; del: () => void }) => {
 
   if ( !isDeleted ) return null;
 

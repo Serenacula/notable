@@ -8,7 +8,7 @@ import Main from '@renderer/containers/main';
 
 /* TOOLBAR */
 
-const Toolbar = ({ isFullscreen }) => {
+const Toolbar = ({ isFullscreen }: { isFullscreen: boolean }) => {
 
   if ( !is.macos || isFullscreen ) return null;
 

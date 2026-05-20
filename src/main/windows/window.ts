@@ -117,7 +117,7 @@ class Window {
 
     this.cleanup ();
 
-    delete this.win;
+    delete (this as any).win;
 
   }
 

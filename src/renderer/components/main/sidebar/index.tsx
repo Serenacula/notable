@@ -9,7 +9,7 @@ import Toolbar from './toolbar';
 
 /* SIDEBAR */
 
-const Sidebar = ({ isFocus, isZen, hasSidebar }) => {
+const Sidebar = ({ isFocus, isZen, hasSidebar }: { isFocus: boolean; isZen: boolean; hasSidebar: boolean }) => {
 
   if ( isFocus || isZen || !hasSidebar ) return null;
 

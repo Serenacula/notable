@@ -8,7 +8,7 @@ import Main from '@renderer/containers/main';
 
 /* ATTACHMENT */
 
-const Attachment = ({ removeAttachment, attachment, name, openInApp }) => {
+const Attachment = ({ removeAttachment, attachment, name, openInApp }: { removeAttachment: (...args: any[]) => void; attachment: AttachmentObj | undefined; name: string; openInApp: (...args: any[]) => void }) => {
 
   if ( !attachment ) return null;
 

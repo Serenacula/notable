@@ -8,7 +8,7 @@ import ToolbarButton from './toolbar_button';
 
 /* TOOLBAR BUTTON OPEN */
 
-const OpenButton = ({ openInApp }) => (
+const OpenButton = ({ openInApp }: { openInApp: () => void }) => (
   <ToolbarButton icon="open_in_new" title="Open in Default App" onClick={() => openInApp ()} />
 );
 

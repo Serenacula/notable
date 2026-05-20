@@ -9,7 +9,7 @@ import Button from './multi_editor_button';
 
 class Tagbox extends React.PureComponent<{ onClick: Function, icon: string, title: string, placeholder: string }, {}> {
 
-  $wrapper; $tagbox;
+  $wrapper: any; $tagbox: any;
 
   componentDidMount () {
 

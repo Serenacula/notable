@@ -8,7 +8,7 @@ import ItemRaw from './item_raw';
 
 /* ITEM */
 
-const Item = ({ index, style, item }) => {
+const Item = ({ index, style, item }: { index: number; style: React.CSSProperties; item: any }) => {
   if ( item.filePath ) {
     if ( item.metadata ) {
       return <ItemNote index={index} style={style} item={item} />;

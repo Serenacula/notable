@@ -8,7 +8,7 @@ import {SortingBys, SortingTypes} from '@renderer/utils/sorting';
 
 /* HEADER */
 
-const Header = ({ sortBy, sortType, setBy, toggleType }) => {
+const Header = ({ sortBy, sortType, setBy, toggleType }: { sortBy: string; sortType: string; setBy: (...args: any[]) => void; toggleType: () => void }) => {
 
   const sortByName = ( sortBy === SortingBys.TITLE ) ? 'Title' : ( sortBy === SortingBys.DATE_CREATED ? 'Date Created' : 'Date Modified' ),
         sortTypeName = ( sortType === SortingTypes.ASC ) ? 'Ascending' : 'Descending';

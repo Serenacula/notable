@@ -64,7 +64,7 @@ class CWD extends Container<CWDState, CWDCTX> {
     } catch ( e ) {
 
       Dialog.alert ( `Couldn't access path: "${folderPath}"` );
-      Dialog.alert ( e.message );
+      Dialog.alert ( (e as Error).message );
 
     }
 

@@ -18,7 +18,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
 
   /* VARIABLES */
 
-  ele; attachment; note; tag; // Globals pointing to the current element/attachment/note/tag object
+  ele: any; attachment: any; note: any; tag: any; // Globals pointing to the current element/attachment/note/tag object
 
   /* SPECIAL */
 
@@ -37,7 +37,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
 
   /* HELPERS */
 
-  _getItem = ( x, y, selector: string ): Element | undefined => {
+  _getItem = ( x: number, y: number, selector: string ): Element | undefined => {
 
     const eles = document.elementsFromPoint ( x, y );
 
@@ -48,7 +48,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
   _makeMenu = ( selector: string | Function = '*', items: MenuItemConstructorOptions[] = [], itemsUpdater = _.noop ) => {
 
     contextMenu ({
-      prepend: () => items as MenuItem[], //TSC: Looks like a bug in `electron-context-menu`?
+      prepend: () => items as unknown as MenuItem[], //TSC: Looks like a bug in `electron-context-menu`?
       shouldShowMenu: ( event, { x, y } ) => {
 
         const ele = _.isString ( selector ) ? this._getItem ( x, y, selector ) : selector ( x, y );
@@ -122,7 +122,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
 
   initInputMenu = () => {
 
-    this._makeMenu ( ( x, y ) => this._getItem ( x, y, 'input, textarea' ) );
+    this._makeMenu ( ( x: number, y: number ) => this._getItem ( x, y, 'input, textarea' ) );
 
   }
 
@@ -241,7 +241,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
 
   initFallbackMenu = () => {
 
-    this._makeMenu ( ( x, y ) => !this._getItem ( x, y, '.attachment, .monaco-editor, .note, .popover-note-tags-list .tag, .sidebar .tag, .preview .tag, .tag[data-tag="__TRASH__"]' ) );
+    this._makeMenu ( ( x: number, y: number ) => !this._getItem ( x, y, '.attachment, .monaco-editor, .note, .popover-note-tags-list .tag, .sidebar .tag, .preview .tag, .tag[data-tag="__TRASH__"]' ) );
 
   }
 

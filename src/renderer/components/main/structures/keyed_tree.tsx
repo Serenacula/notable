@@ -6,7 +6,7 @@ import Tree from './tree';
 
 /* KEYED TREE */
 
-const KeyedTree = ( props ) => (
+const KeyedTree = ( props: any ) => (
   <Tree {...props} isKeyed={true} />
 );
 

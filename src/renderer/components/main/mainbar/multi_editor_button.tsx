@@ -6,7 +6,7 @@ import * as React from 'react';
 
 /* MULTI EDITOR BUTTON */
 
-const Button = ({ icon, title, onClick = _.noop, color = '' }) => (
+const Button = ({ icon, title, onClick = _.noop, color = '' }: { icon: string; title: string; onClick?: () => void; color?: string }) => (
   <div className={`button bordered ${color}`} title={title} onClick={onClick}>
     <i className="icon">{icon}</i>
   </div>

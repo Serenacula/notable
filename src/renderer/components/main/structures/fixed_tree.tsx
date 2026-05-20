@@ -6,7 +6,7 @@ import Tree from './tree';
 
 /* FIXED TREE */
 
-const FixedTree = ( props ) => (
+const FixedTree = ( props: any ) => (
   <Tree {...props} isFixed={true} />
 );
 

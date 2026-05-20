@@ -8,7 +8,7 @@ import ToolbarButton from './toolbar_button';
 
 /* TOOLBAR BUTTON ATTACHMENTS */
 
-const AttachmentsButton = ({ isEditing, toggleEditing }) => {
+const AttachmentsButton = ({ isEditing, toggleEditing }: { isEditing: boolean; toggleEditing: () => void }) => {
 
   if ( !isEditing ) return <ToolbarButton className="popover-note-attachments-trigger" icon="paperclip" title="Edit Attachments" onClick={() => toggleEditing ()} />;
 

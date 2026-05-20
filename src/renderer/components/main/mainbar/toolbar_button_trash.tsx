@@ -8,7 +8,7 @@ import ToolbarButton from './toolbar_button';
 
 /* TOOLBAR BUTTON TRASH */
 
-const TrashButton = ({ isDeleted, toggleDeleted, del }) => {
+const TrashButton = ({ isDeleted, toggleDeleted, del }: { isDeleted: boolean; toggleDeleted: () => void; del: () => void }) => {
 
   if ( !isDeleted ) return <ToolbarButton icon="delete" title="Move to Trash" onClick={() => toggleDeleted ()} />;
 

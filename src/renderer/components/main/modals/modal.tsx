@@ -6,9 +6,9 @@ import * as ReactDOM from 'react-dom';
 
 /* MODAL */
 
-class Modal extends React.Component<{ open: boolean, onBeforeOpen?: Function, onOpen?: Function, onBeforeClose?: Function, onClose?: Function, className?: string }, {}> {
+class Modal extends React.Component<{ open: boolean; onBeforeOpen?: Function; onOpen?: Function; onBeforeClose?: Function; onClose?: Function; className?: string; children?: React.ReactNode }, {}> {
 
-  $modal;
+  $modal: any;
 
   componentDidMount () {
 

@@ -2,14 +2,14 @@
 /* IMPORT */
 
 import * as _ from 'lodash';
-import * as isShallowEqual from 'is-shallow-equal';
+import isShallowEqual from 'is-shallow-equal';
 import * as React from 'react';
 import {createElement} from 'react';
 import {FixedSizeList} from 'react-window';
 
 /* TREE */
 
-class Tree extends React.Component<{ children, data: any[], className?: string, FallbackEmptyComponent?, fallbackEmptyMessage?: string, getHeight?: Function, getItemChildren?: Function, getItemKey?: Function, filterItem?: Function, isFlat?: boolean, isFixed?: boolean, isKeyed?: boolean }, { height: number, items: any[], levels: number[], isLeafs: boolean[] }> {
+class Tree extends React.Component<{ children: React.ComponentType<any>, data: any[], className?: string, FallbackEmptyComponent?: React.ComponentType, fallbackEmptyMessage?: string, getHeight?: Function, getItemChildren?: Function, getItemKey?: Function, filterItem?: Function, isFlat?: boolean, isFixed?: boolean, isKeyed?: boolean }, { height: number, items: any[], levels: number[], isLeafs: boolean[] }> {
 
   /* VARIABLES */
 
@@ -44,13 +44,13 @@ class Tree extends React.Component<{ children, data: any[], className?: string, 
 
   }
 
-  componentWillReceiveProps ( propsNext ) {
+  componentWillReceiveProps ( propsNext: any ) {
 
     this.update ( propsNext );
 
   }
 
-  shouldComponentUpdate ( propsNext, stateNext ) {
+  shouldComponentUpdate ( propsNext: any, stateNext: any ) {
 
     return this.state.height !== stateNext.height || !isShallowEqual ( this.state.items, stateNext.items );
 
@@ -105,7 +105,7 @@ class Tree extends React.Component<{ children, data: any[], className?: string, 
 
   }
 
-  getItemIndex = ( item ) => {
+  getItemIndex = ( item: any ) => {
 
     return this.state.items.indexOf ( item );
 
@@ -143,7 +143,7 @@ class Tree extends React.Component<{ children, data: any[], className?: string, 
 
   };
 
-  getItemChildren = this.props.getItemChildren || function ( item ) {
+  getItemChildren = this.props.getItemChildren || function ( item: any ) {
 
     return item.children;
 
@@ -171,7 +171,7 @@ class Tree extends React.Component<{ children, data: any[], className?: string, 
 
       if ( !children ) return;
 
-      children.forEach ( item => {
+      children.forEach ( ( item: any ) => {
 
         const {items: childrenItems, levels: childrenLevels, isLeafs: childrenIsLeafs} = this.getItems ( [item], level + 1 );
 
@@ -187,15 +187,15 @@ class Tree extends React.Component<{ children, data: any[], className?: string, 
 
   }
 
-  areItemsKeysEqual ( x, y ) {
+  areItemsKeysEqual ( x: any[], y: any[] ) {
 
     if ( x.length !== y.length ) return false;
 
-    return x.every ( ( item, index ) => this.getItemKey ( item ) === this.getItemKey ( y[index] ) );
+    return x.every ( ( item: any, index: number ) => this.getItemKey ( item ) === this.getItemKey ( y[index] ) );
 
   }
 
-  updateItems = ( props, callback? ) => {
+  updateItems = ( props: any, callback?: any ) => {
 
     const {items, levels, isLeafs} = this.getItems ( props.data );
 

@@ -2,7 +2,7 @@
 /* IMPORT */
 
 import * as os from 'os';
-import * as Store from 'electron-store';
+import Store from 'electron-store';
 import {darkMode} from 'electron-util';
 
 /* SETTINGS */

@@ -106,7 +106,7 @@ class Monaco extends React.Component<{ filePath: string, language: string, theme
 
   }
 
-  componentDidUpdate ( prevProps ) {
+  componentDidUpdate ( prevProps: any ) {
 
     this.editorUpdate ();
 
@@ -130,7 +130,7 @@ class Monaco extends React.Component<{ filePath: string, language: string, theme
 
   }
 
-  shouldComponentUpdate ( nextProps ) { //TODO: Most of these update* functions should run in `componentDidMount`, but ensuring that the "value" doesn't get reset unnecessarily
+  shouldComponentUpdate ( nextProps: any ) { //TODO: Most of these update* functions should run in `componentDidMount`, but ensuring that the "value" doesn't get reset unnecessarily
 
     this.editorUpdate ();
 

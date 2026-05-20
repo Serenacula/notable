@@ -8,7 +8,7 @@ import Main from '@renderer/containers/main';
 
 /* TAG */
 
-const Tag = ({ tag, set, removeTag }) => {
+const Tag = ({ tag, set, removeTag }: { tag: string; set: (...args: any[]) => void; removeTag: (...args: any[]) => void }) => {
 
   if ( !tag ) return null;
 

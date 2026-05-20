@@ -8,7 +8,7 @@ import ToolbarButton from './toolbar_button';
 
 /* TOOLBAR BUTTON EDITOR */
 
-const EditorButton = ({ isEditing, toggleEditing }) => {
+const EditorButton = ({ isEditing, toggleEditing }: { isEditing: boolean; toggleEditing: () => void }) => {
 
   if ( !isEditing ) return <ToolbarButton icon="pencil" title="Edit" onClick={() => toggleEditing ()} />;
 

@@ -7,7 +7,7 @@ import CWD from '@renderer/containers/cwd';
 
 /* FOOTER */
 
-const Footer = ({ select, selectDefault }) => (
+const Footer = ({ select, selectDefault }: { select: () => void; selectDefault: () => void }) => (
   <div className="layout-footer toolbar">
     <div className="multiple fluid center-y">
       <div className="button default no-grow" onClick={selectDefault}>

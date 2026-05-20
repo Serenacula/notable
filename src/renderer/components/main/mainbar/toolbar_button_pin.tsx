@@ -8,7 +8,7 @@ import ToolbarButton from './toolbar_button';
 
 /* TOOLBAR BUTTON PIN */
 
-const PinButton = ({ isPinned, togglePin }) => {
+const PinButton = ({ isPinned, togglePin }: { isPinned: boolean; togglePin: () => void }) => {
 
   if ( !isPinned ) return <ToolbarButton icon="pin_outline" title="Pin" onClick={() => togglePin ()} />
 

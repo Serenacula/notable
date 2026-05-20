@@ -9,7 +9,7 @@ import ToolbarButton from './toolbar_button';
 
 /* TOOLBAR BUTTON TAGS */
 
-const TagsButton = ({ isEditing, toggleEditing }) => {
+const TagsButton = ({ isEditing, toggleEditing }: { isEditing: boolean; toggleEditing: () => void }) => {
 
   if ( !isEditing ) return <ToolbarButton className="popover-note-tags-trigger" icon="tag" title="Edit Tags" onClick={() => toggleEditing ()} />;
 

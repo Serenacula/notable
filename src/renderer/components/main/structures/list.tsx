@@ -6,7 +6,7 @@ import Tree from './tree';
 
 /* LIST */
 
-const List = ( props ) => (
+const List = ( props: any ) => (
   <Tree {...props} isFlat={true} />
 );
 

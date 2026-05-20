@@ -7,7 +7,7 @@ import Main from '@renderer/containers/main';
 
 /* TOOLBAR */
 
-const NewButton = ({ noteNew }) => (
+const NewButton = ({ noteNew }: { noteNew: () => void }) => (
   <div className="button bordered xsmall" title="New Note" onClick={() => noteNew ()}>
     <i className="icon">plus</i>
   </div>

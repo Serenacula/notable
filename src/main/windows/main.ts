@@ -102,7 +102,7 @@ class Main extends Route {
             visible: is.macos
           },
           {
-            role: 'hideothers',
+            role: 'hideOthers',
             visible: is.macos
           },
           {
@@ -262,7 +262,7 @@ class Main extends Route {
           { role: 'paste' },
           { role: 'pasteAndMatchStyle' },
           { role: 'delete' },
-          { role: 'selectall' },
+          { role: 'selectAll' },
           {
             type: 'separator'
           },
@@ -295,8 +295,8 @@ class Main extends Route {
           {
             label: 'Speech',
             submenu: [
-              { role: 'startspeaking' },
-              { role: 'stopspeaking' }
+              { role: 'startSpeaking' },
+              { role: 'stopSpeaking' }
             ],
             visible: is.macos
           }
@@ -310,16 +310,16 @@ class Main extends Route {
             visible: Environment.isDevelopment
           },
           {
-            role: 'forcereload',
+            role: 'forceReload',
             visible: Environment.isDevelopment
           },
           {
             type: 'separator',
             visible: Environment.isDevelopment
           },
-          { role: 'resetzoom' },
-          { role: 'zoomin' },
-          { role: 'zoomout' },
+          { role: 'resetZoom' },
+          { role: 'zoomIn' },
+          { role: 'zoomOut' },
           { type: 'separator' },
           {
             label: 'Toggle Focus Mode',
@@ -437,7 +437,7 @@ class Main extends Route {
           },
           { type: 'separator' },
           {
-            role: 'toggledevtools',
+            role: 'toggleDevTools',
             accelerator: ''
           }
         ]
@@ -508,7 +508,7 @@ class Main extends Route {
 
   __close = ( event: Event ) => {
 
-    if ( global.isQuitting ) return;
+    if ( (global as any).isQuitting ) return;
 
     event.preventDefault ();
 

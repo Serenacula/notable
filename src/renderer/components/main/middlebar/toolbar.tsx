@@ -10,7 +10,7 @@ import NewButton from './toolbar_button_new';
 
 /* TOOLBAR */
 
-const Toolbar = ({ isFullscreen, hasSidebar }) => (
+const Toolbar = ({ isFullscreen, hasSidebar }: { isFullscreen: boolean; hasSidebar: boolean }) => (
   <div className="layout-header toolbar">
     <div className="multiple grow">
       {isFullscreen || hasSidebar || !is.macos ? null : (

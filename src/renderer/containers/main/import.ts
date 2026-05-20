@@ -74,7 +74,7 @@ class Import extends Container<ImportState, MainCTX> {
 
     if ( !content ) return;
 
-    const metadata = Metadata.get ( content );
+    const metadata = Metadata.get ( content ) as Record<string, any>;
 
     if ( !metadata['tags'] ) metadata['tags'] = [];
 

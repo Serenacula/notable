@@ -262,7 +262,7 @@ class App {
 
   quit () {
 
-    global.isQuitting = true;
+    (global as any).isQuitting = true;
 
     this.___beforeQuit_off ();
 

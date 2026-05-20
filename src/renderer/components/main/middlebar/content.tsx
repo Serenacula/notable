@@ -10,11 +10,11 @@ import Note from './note';
 /* HELPERS */
 
 const getHeight = () => window.innerHeight - 65, //UGLY: But it gets the job done, quickly
-      getItemKey = note => note.filePath;
+      getItemKey = ( note: NoteObj ) => note.filePath;
 
 /* CONTENT */
 
-const Content = ({ isLoading, notes }) => {
+const Content = ({ isLoading, notes }: { isLoading: boolean; notes: NoteObj[] }) => {
 
   if ( isLoading ) return null;
 

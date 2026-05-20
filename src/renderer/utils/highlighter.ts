@@ -50,7 +50,7 @@ const Highlighter = {
 
     if ( !language ) return str;
 
-    const lang = Highlighter.languagesAliases[language] || language;
+    const lang = (Highlighter.languagesAliases as Record<string, string>)[language] || language;
 
     if ( !Highlighter.initLanguage ( lang ) ) return str;
 

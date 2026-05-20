@@ -6,7 +6,7 @@ import List from './list';
 
 /* FIXED LIST */
 
-const FixedList = ( props ) => (
+const FixedList = ( props: any ) => (
   <List {...props} isFixed={true} />
 );
 

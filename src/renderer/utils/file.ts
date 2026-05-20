@@ -103,7 +103,7 @@ const File = {
 
     } catch ( e ) {
 
-      return await File._handleError ( e, dstPath, File.copy, [srcPath, dstPath] );
+      return await File._handleError ( e as NodeJS.ErrnoException, dstPath, File.copy, [srcPath, dstPath] );
 
     }
 
@@ -117,7 +117,7 @@ const File = {
 
     } catch ( e ) {
 
-      return await File._handleError ( e, newPath, File.rename, [oldPath, newPath] );
+      return await File._handleError ( e as NodeJS.ErrnoException, newPath, File.rename, [oldPath, newPath] );
 
     }
 
@@ -131,7 +131,7 @@ const File = {
 
     } catch ( e ) {
 
-      return await File._handleError ( e, filePath, File.write, [filePath, content] );
+      return await File._handleError ( e as NodeJS.ErrnoException, filePath, File.write, [filePath, content] );
 
     }
 

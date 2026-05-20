@@ -3,7 +3,7 @@
 
 import * as _ from 'lodash';
 import * as React from 'react';
-import * as isShallowEqual from 'is-shallow-equal';
+import isShallowEqual from 'is-shallow-equal';
 import {connect} from 'overstated';
 import Main from '@renderer/containers/main';
 import Item from '@renderer/components/main/quick_panel/item';
@@ -16,7 +16,7 @@ class QuickPanel extends React.Component<{ isOpen: boolean, setQuery: Function, 
 
   inputRef = React.createRef<HTMLInputElement> ();
 
-  shouldComponentUpdate ( nextProps ) {
+  shouldComponentUpdate ( nextProps: any ) {
 
     return this.props.isOpen !== nextProps.isOpen || !isShallowEqual ( this.props.results.items, nextProps.results.items ) || !isShallowEqual ( this.props.results.empty, nextProps.results.empty );
 

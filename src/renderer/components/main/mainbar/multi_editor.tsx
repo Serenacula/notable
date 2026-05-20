@@ -9,7 +9,7 @@ import Tagbox from './multi_editor_tagbox';
 
 /* MULTI EDITOR */
 
-const MultiEditor = ({ notesNr, favorite, unfavorite, pin, unpin, trash, untrash, del, tagsAdd, tagsRemove, openInApp }) => (
+const MultiEditor = ({ notesNr, favorite, unfavorite, pin, unpin, trash, untrash, del, tagsAdd, tagsRemove, openInApp }: { notesNr: number; favorite: (...args: any[]) => void; unfavorite: (...args: any[]) => void; pin: (...args: any[]) => void; unpin: (...args: any[]) => void; trash: (...args: any[]) => void; untrash: (...args: any[]) => void; del: (...args: any[]) => void; tagsAdd: (...args: any[]) => void; tagsRemove: (...args: any[]) => void; openInApp: (...args: any[]) => void }) => (
   <div className="multi-editor">
     <h1>{notesNr} notes selected</h1>
     <div className="container bordered actions">

@@ -20,13 +20,13 @@ const getHeight = () => is.macos ? window.innerHeight - 38 : window.innerHeight,
 
 /* CONTENT */
 
-const Content = ({ isLoading, all, favorites, notebooks, tags, templates, untagged, trash }) => {
+const Content = ({ isLoading, all, favorites, notebooks, tags, templates, untagged, trash }: { isLoading: boolean; all: TagObj; favorites: TagObj; notebooks: TagObj; tags: TagObj; templates: TagObj; untagged: TagObj; trash: TagObj }) => {
 
   if ( isLoading ) return null;
 
   let data = [all, favorites, notebooks, tags, templates, untagged, trash];
 
-  if ( !notebooks.notes.length && !templates.notes.length ) data.splice ( 3, 1, ...Tags.sort ( Object.values ( tags.tags ) ) ); // If this is the only nestable special tag, avoid using it
+  if ( !notebooks.notes.length && !templates.notes.length ) data.splice ( 3, 1, ...(Tags.sort ( Object.values ( tags.tags ) as TagObj[] ) as TagObj[]) ); // If this is the only nestable special tag, avoid using it
 
   return <KeyedTree className="list-tags layout-content" data={data} getHeight={getHeight} getItemChildren={getItemChildren} getItemKey={getItemKey} filterItem={filterItem}>{Tag}</KeyedTree>;
 

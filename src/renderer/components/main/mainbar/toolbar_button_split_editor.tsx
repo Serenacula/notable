@@ -8,7 +8,7 @@ import ToolbarButton from './toolbar_button';
 
 /* TOOLBAR BUTTON SPLIT EDITOR */
 
-const SplitEditorButton = ({ isSplit, toggleSplit }) => {
+const SplitEditorButton = ({ isSplit, toggleSplit }: { isSplit: boolean; toggleSplit: () => void }) => {
 
   if ( !isSplit ) return <ToolbarButton icon="split_view" title="Enter Split View Mode" onClick={() => toggleSplit ()} />;
 

@@ -9,7 +9,7 @@ import * as ReactDOM from 'react-dom';
 
 class Tagbox extends React.PureComponent<{ onChange: Function, tags: string[], className?: string }, {}> {
 
-  $tagbox;
+  $tagbox: any;
 
   componentDidMount () {
 

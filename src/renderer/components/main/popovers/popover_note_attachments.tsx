@@ -11,7 +11,7 @@ import Popover from './popover';
 
 /* POPOVER NOTE ATTACHMENTS */
 
-const PopoverNoteAttachments = ({ addAttachments, attachments, isEditing, toggleEditing }) => (
+const PopoverNoteAttachments = ({ addAttachments, attachments, isEditing, toggleEditing }: { addAttachments: () => void; attachments: string[]; isEditing: boolean; toggleEditing: (...args: any[]) => void }) => (
   <Popover open={isEditing} onBeforeClose={() => _.defer ( () => toggleEditing ( false ) )} anchor=".popover-note-attachments-trigger" className="popover-note-attachments">
     <FixedList className="popover-note-attachments-list card-block" data={attachments} fallbackEmptyMessage="No attachments">{Attachment}</FixedList>
     <div className="card-footer button compact bordered small" onClick={() => addAttachments ()}>Add Attachments...</div>

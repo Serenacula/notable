@@ -48,7 +48,7 @@ class GlobalPlugins extends Component<{ container: IMain }, {}> {
 
   }
 
-  __quickPanelClick = ( event ) => {
+  __quickPanelClick = ( event: any ) => {
 
     const nth = $(event.currentTarget).data ( 'nth' );
 

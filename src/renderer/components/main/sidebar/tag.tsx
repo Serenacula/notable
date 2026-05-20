@@ -8,7 +8,7 @@ import Main from '@renderer/containers/main';
 
 /* TAG */
 
-const Tag = ({ style, tag, level, isLeaf, isActive, set, toggleCollapse }) => {
+const Tag = ({ style, tag, level, isLeaf, isActive, set, toggleCollapse }: { style: React.CSSProperties; tag: TagObj | undefined; level: number; isLeaf: boolean; isActive: boolean; set: (...args: any[]) => void; toggleCollapse: (...args: any[]) => void }) => {
 
   if ( !tag ) return null;
 
