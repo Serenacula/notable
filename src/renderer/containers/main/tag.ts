@@ -6,7 +6,7 @@ import {Container, autosuspend} from 'overstated';
 import Tags, {TagSpecials} from '@renderer/utils/tags';
 
 const {SEPARATOR} = Tags;
-const {DEFAULT, ALL, FAVORITES, NOTEBOOKS, TAGS, TEMPLATES, UNTAGGED, TRASH} = TagSpecials;
+const {ALL, FAVORITES, NOTEBOOKS, TAGS, TEMPLATES, UNTAGGED, TRASH} = TagSpecials;
 
 /* TAG */
 
@@ -21,7 +21,7 @@ class Tag extends Container<TagState, MainCTX> {
   /* STATE */
 
   state = {
-    tag: DEFAULT
+    tag: ALL
   };
 
   /* CONSTRUCTOR */
@@ -139,7 +139,7 @@ class Tag extends Container<TagState, MainCTX> {
 
   set = async ( tag: string ) => {
 
-    if ( !this.hasNotes ( tag ) ) tag = DEFAULT;
+    if ( !this.hasNotes ( tag ) ) tag = ALL;
 
     await this.setState ({ tag });
 
@@ -189,7 +189,7 @@ class Tag extends Container<TagState, MainCTX> {
 
     if ( this.hasNotes ( this.state.tag ) ) return;
 
-    const tag = DEFAULT;
+    const tag = ALL;
 
     await this.set ( tag );
 

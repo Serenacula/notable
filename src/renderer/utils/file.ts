@@ -18,7 +18,7 @@ const Storage = { //TODO: This shouldn't be here
 
     return async function wrappedAction ( ...args: any[] ) {
       Storage.operations++;
-      const res = await action.apply ( undefined, args );
+      const res = await action ( ...args );
       Storage.operations--;
       return res;
     };

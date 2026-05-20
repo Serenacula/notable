@@ -31,7 +31,8 @@ const Path = {
 
     baseName = baseName.replace ( /\//g, '∕' ); // Preserving a dash-like character
 
-    let {name, ext} = path.parse ( baseName );
+    const {ext} = path.parse ( baseName );
+    let {name} = path.parse ( baseName );
 
     name = name.replace ( / \(\d+\)$/, '' ); // Removing already existent suffix
     name = Path.sanitize ( name ); // Removing weird characters

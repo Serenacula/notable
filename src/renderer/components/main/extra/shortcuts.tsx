@@ -64,7 +64,7 @@ class Shortcuts extends Component<{ container: IMain }, {}> {
 
     const isEditable = $.isEditable ( document.activeElement );
 
-    for ( let shortcuts in this.shortcuts ) {
+    for ( const shortcuts in this.shortcuts ) {
 
       const [handler, hasPriority] = this.shortcuts[shortcuts];
 

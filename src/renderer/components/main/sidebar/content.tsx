@@ -24,7 +24,7 @@ const Content = ({ isLoading, all, favorites, notebooks, tags, templates, untagg
 
   if ( isLoading ) return null;
 
-  let data = [all, favorites, notebooks, tags, templates, untagged, trash];
+  const data = [all, favorites, notebooks, tags, templates, untagged, trash];
 
   if ( !notebooks.notes.length && !templates.notes.length ) data.splice ( 3, 1, ...(Tags.sort ( Object.values ( tags.tags ) as TagObj[] ) as TagObj[]) ); // If this is the only nestable special tag, avoid using it
 

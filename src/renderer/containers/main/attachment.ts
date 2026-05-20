@@ -89,7 +89,7 @@ class Attachment extends Container<AttachmentState, MainCTX> {
 
     const notes = this.getNotes ( attachment );
 
-    for ( let note of notes ) {
+    for ( const note of notes ) {
 
       await this.ctx.note.replaceAttachment ( note, attachment, nextAttachment );
 

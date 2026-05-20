@@ -307,10 +307,10 @@ const Monaco = {
 
     const _register = Command.prototype.register;
 
-    Command.prototype.register = function () {
+    Command.prototype.register = function ( ...args: any[] ) {
       const patcher = Monaco.keybindingsPatched[this.id];
       if ( patcher === false || ( patcher && patcher ( this ) === false ) ) return; // Disabled
-      return _register.apply ( this, arguments );
+      return _register.apply ( this, args );
     };
 
   }

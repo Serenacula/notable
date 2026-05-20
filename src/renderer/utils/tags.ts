@@ -6,7 +6,6 @@ import * as _ from 'lodash';
 /* ENUMS */
 
 enum TagSpecials {
-  DEFAULT = '__ALL__',
   ALL = '__ALL__',
   FAVORITES = '__FAVORITES__',
   NOTEBOOKS = 'Notebooks',

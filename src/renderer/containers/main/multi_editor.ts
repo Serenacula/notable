@@ -68,9 +68,10 @@ class MultiEditor extends Container<MultiEditorState, MainCTX> {
 
     if ( !noteStart ) return;
 
-    let startIndex = notes.indexOf ( noteStart ),
-        endIndex = notes.indexOf ( noteEnd ),
-        minIndex = Math.min ( startIndex, endIndex ),
+    const startIndex = notes.indexOf ( noteStart ),
+          endIndex = notes.indexOf ( noteEnd );
+
+    let minIndex = Math.min ( startIndex, endIndex ),
         maxIndex = Math.max ( startIndex, endIndex );
 
     if ( minIndex === maxIndex ) return;

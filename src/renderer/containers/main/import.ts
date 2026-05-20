@@ -94,7 +94,7 @@ class Import extends Container<ImportState, MainCTX> {
 
     const importTag = this._getImportTag ( filePaths.join ( '' ) );
 
-    for ( let filePath of filePaths ) {
+    for ( const filePath of filePaths ) {
 
       const ext = path.extname ( filePath );
 
