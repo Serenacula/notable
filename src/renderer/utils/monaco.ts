@@ -24,14 +24,16 @@ const Monaco = {
     dragAndDrop: true,
     folding: false,
     fontSize: 16 * .875,
+    guides: {
+      indentation: false,
+      highlightActiveIndentation: false
+    },
     hideCursorInOverviewRuler: true,
-    highlightActiveIndentGuide: false,
     hover: {
       enabled: false
     },
-    iconsInSuggestions: false,
     lightbulb: {
-      enabled: false
+      enabled: 'off'
     },
     lineDecorationsWidth: 3,
     lineHeight: 16 * .875 * 1.5,
@@ -40,10 +42,9 @@ const Monaco = {
       enabled: Settings.get ( 'monaco.editorOptions.minimap.enabled' )
     },
     model: null,
-    occurrencesHighlight: false,
+    occurrencesHighlight: 'off',
     overviewRulerBorder: false,
     overviewRulerLanes: 0,
-    renderIndentGuides: false,
     roundedSelection: false,
     scrollbar: {
       useShadows: false,
@@ -53,9 +54,11 @@ const Monaco = {
     scrollBeyondLastColumn: 0,
     scrollBeyondLastLine: false,
     snippetSuggestions: 'none',
+    suggest: {
+      showIcons: false
+    },
     wordWrap: Settings.get ( 'monaco.editorOptions.wordWrap' ),
     wordWrapColumn: 1000000,
-    wordWrapMinified: false,
     wrappingIndent: 'same'
   } as monaco.editor.IEditorOptions,
 
@@ -101,7 +104,7 @@ const Monaco = {
       options: {
         kbOpts: {
           kbExpr: EditorContextKeys.editorTextFocus,
-          primary: monaco.KeyMod.Alt | monaco.KeyCode.KEY_M,
+          primary: monaco.KeyMod.Alt | monaco.KeyCode.KeyM,
           weight: 100
         }
       },
@@ -123,7 +126,7 @@ const Monaco = {
         precondition: EditorContextKeys.writable,
         kbOpts: {
           kbExpr: EditorContextKeys.editorTextFocus,
-          primary: monaco.KeyMod.Alt | monaco.KeyCode.KEY_Z,
+          primary: monaco.KeyMod.Alt | monaco.KeyCode.KeyZ,
           weight: 100
         }
       },
@@ -157,7 +160,7 @@ const Monaco = {
         precondition: EditorContextKeys.writable,
         kbOpts: {
           kbExpr: EditorContextKeys.editorTextFocus,
-          primary: monaco.KeyMod.Alt | monaco.KeyCode.KEY_D,
+          primary: monaco.KeyMod.Alt | monaco.KeyCode.KeyD,
           weight: 100
         }
       },
