@@ -125,8 +125,9 @@ const postUtils = {
 
 function processCheckboxNth ( html: string ): string {
   let nth = 0;
-  return html.replace ( /<input type="checkbox"([^>]*)>/gm, ( match, attrs ) => {
-    return `<input type="checkbox"${attrs} data-nth="${nth++}">`;
+  return html.replace ( /<input\b([^>]*)>/gm, ( match, attrs ) => {
+    if ( !/\btype="checkbox"/.test ( attrs ) ) return match;
+    return `<input${attrs} data-nth="${nth++}">`;
   });
 }
 
