@@ -6,7 +6,7 @@ import {shell} from 'electron';
 import Dialog from 'electron-dialog';
 import * as CRC32 from 'crc-32'; // Not a cryptographic hash function, but it's good enough (and fast!) for our purposes
 import * as fs from 'fs';
-import {AllHtmlEntities as entities} from 'html-entities';
+import {decode as htmlDecode} from 'html-entities';
 import {Container, autosuspend} from 'overstated';
 import * as path from 'path';
 import Config from '@common/config';
@@ -56,7 +56,7 @@ class Note extends Container<NoteState, MainCTX> {
 
   _inferTitleFromLine ( line: string | null, fallback: string = 'Untitled' ): string {
 
-    return line ? entities.decode ( Markdown.strip ( line.trim () ).replace ( /\s{2,}/g, ' ' ) ) || fallback : fallback;
+    return line ? htmlDecode ( Markdown.strip ( line.trim () ).replace ( /\s{2,}/g, ' ' ) ) || fallback : fallback;
 
   }
 
