@@ -341,7 +341,7 @@ class IPC extends Component<{ containers: [IMain, ICWD]}, {}> {
 
   __trashEmpty = () => {
 
-    this.main.trash.empty ();
+    this.main.tag.emptyTrash ();
 
   }
 

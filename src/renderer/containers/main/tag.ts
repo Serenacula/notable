@@ -2,6 +2,7 @@
 /* IMPORT */
 
 import * as _ from 'lodash';
+import Dialog from 'electron-dialog';
 import {Container, autosuspend} from 'overstated';
 import Tags, {TagSpecials} from '@renderer/utils/tags';
 
@@ -218,6 +219,22 @@ class Tag extends Container<TagState, MainCTX> {
   next = () => {
 
     return this.navigate ( 1 );
+
+  }
+
+  trashIsEmpty = (): boolean => {
+
+    return !this.getNotes ( TRASH ).length;
+
+  }
+
+  emptyTrash = () => {
+
+    if ( !Dialog.confirm ( 'Are you sure you want to permanently empty the trash?' ) ) return;
+
+    const notes = this.getNotes ( TRASH );
+
+    return Promise.all ( notes.map ( note => this.ctx.note.delete ( note, true ) ) );
 
   }
 

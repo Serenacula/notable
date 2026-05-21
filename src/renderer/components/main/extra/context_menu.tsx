@@ -233,7 +233,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
     this._makeMenu ( '.tag[data-tag="__TRASH__"]', [
       {
         label: 'Empty Trash',
-        click: this.props.container.trash.empty
+        click: this.props.container.tag.emptyTrash
       }
     ], this.updateTrashMenu );
 
@@ -307,7 +307,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
 
   updateTrashMenu = ( items: MenuItemConstructorOptions[] ) => {
 
-    items[0].enabled = !this.props.container.trash.isEmpty ();
+    items[0].enabled = !this.props.container.tag.trashIsEmpty ();
 
   }
 

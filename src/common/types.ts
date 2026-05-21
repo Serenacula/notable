@@ -178,8 +178,6 @@ type ThemesState = {
   themes: string[]
 };
 
-type TrashState = {};
-
 type TutorialState = {};
 
 type WindowState = {
@@ -210,7 +208,6 @@ type MainState = {
   tags: TagsState,
   theme: ThemeState,
   themes: ThemesState,
-  trash: TrashState,
   tutorial: TutorialState,
   window: WindowState
 };
@@ -243,7 +240,6 @@ type MainCTX = {
   tags: import ( '@renderer/containers/main/tags' ).default,
   theme: import ( '@renderer/containers/main/theme' ).default,
   themes: import ( '@renderer/containers/main/themes' ).default,
-  trash: import ( '@renderer/containers/main/trash' ).default,
   tutorial: import ( '@renderer/containers/main/tutorial' ).default,
   window: import ( '@renderer/containers/main/window' ).default
 };
