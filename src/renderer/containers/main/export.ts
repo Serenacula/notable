@@ -73,11 +73,11 @@ class Export extends Container<ExportState, MainCTX> {
         metadata.push (
           `<meta name="metadata:tags" content="${this.ctx.note.getTags ( note ).join ( ', ' )}">`,
           `<meta name="metadata:attachments" content="${this.ctx.note.getAttachments ( note ).join ( ', ' )}">`,
-          `<meta name="metadata:deleted" content="${this.ctx.note.isDeleted ()}">`,
-          `<meta name="metadata:favorited" content="${this.ctx.note.isFavorited ()}">`,
-          `<meta name="metadata:pinned" content="${this.ctx.note.isPinned ()}">`,
-          `<meta name="metadata:created" content="${this.ctx.note.getCreated ().toISOString ()}">`,
-          `<meta name="metadata:modified" content="${this.ctx.note.getModified ().toISOString ()}">`
+          `<meta name="metadata:deleted" content="${this.ctx.note.isDeleted ( note )}">`,
+          `<meta name="metadata:favorited" content="${this.ctx.note.isFavorited ( note )}">`,
+          `<meta name="metadata:pinned" content="${this.ctx.note.isPinned ( note )}">`,
+          `<meta name="metadata:created" content="${this.ctx.note.getCreated ( note ).toISOString ()}">`,
+          `<meta name="metadata:modified" content="${this.ctx.note.getModified ( note ).toISOString ()}">`
         );
       }
 
@@ -171,7 +171,7 @@ class Export extends Container<ExportState, MainCTX> {
           notesPath = exportPath,
           attachmentsPath = path.join ( exportPath, 'attachments' );
 
-    notes.forEach ( async note => {
+    for ( const note of notes ) {
 
       /* CONTENT */
 
@@ -181,26 +181,26 @@ class Export extends Container<ExportState, MainCTX> {
             content = await renderer ( note, notePath );
 
       if ( content ) {
-        File.write ( notePath, content );
+        await File.write ( notePath, content );
       }
 
       /* ATTACHMENTS */
 
       const attachments = this.ctx.note.getAttachments ( note );
 
-      attachments.forEach ( async fileName => {
+      for ( const fileName of attachments ) {
 
         const attachment = this.ctx.attachment.get ( fileName );
 
-        if ( !attachment ) return;
+        if ( !attachment ) continue;
 
         const {filePath: attachmentPath} = await Path.getAllowedPath ( attachmentsPath, fileName );
 
-        File.copy ( attachment.filePath, attachmentPath );
+        await File.copy ( attachment.filePath, attachmentPath );
 
-      });
+      }
 
-    });
+    }
 
   }
 
