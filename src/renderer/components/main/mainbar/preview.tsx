@@ -3,6 +3,7 @@
 
 import * as React from 'react';
 import {connect} from 'overstated';
+import Config from '@common/config';
 import Markdown from '@renderer/utils/markdown';
 import Main from '@renderer/containers/main';
 
@@ -18,14 +19,13 @@ const Preview = ({ content }: { content: string }) => {
     if ( !container ) return;
     const mermaidNodes = container.querySelectorAll<HTMLElement> ( '.mermaid' );
     if ( !mermaidNodes.length ) return;
-    try {
-      const mermaid = require ( 'mermaid' );
-      const Config = require ( '@common/config' ).default;
+    let cancelled = false;
+    void import ( 'mermaid' ).then ( async ( { default: mermaid } ) => {
+      if ( cancelled ) return;
       mermaid.initialize ( { ...Config.mermaid, startOnLoad: false } );
-      mermaid.init ( undefined, mermaidNodes );
-    } catch ( e ) {
-      console.error ( '[mermaid]', e );
-    }
+      await mermaid.run ( { nodes: Array.from ( mermaidNodes ) } );
+    } ).catch ( e => console.error ( '[mermaid]', e ) );
+    return () => { cancelled = true; };
   });
 
   return <div ref={containerRef} className="layout-content preview" dangerouslySetInnerHTML={{ __html: html }}></div>;
