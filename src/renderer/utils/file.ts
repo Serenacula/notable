@@ -6,7 +6,7 @@ import * as path from 'path';
 
 /* STORAGE */
 
-const Storage = { //TODO: This shouldn't be here
+const Storage = {
 
   /* VARIABLES */
 
