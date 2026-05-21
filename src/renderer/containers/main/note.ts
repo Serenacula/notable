@@ -733,7 +733,7 @@ class Note extends Container<NoteState, MainCTX> {
 
     return tags.filter ( _.isString )
                .map ( tag => _.trim ( tag, Tags.SEPARATOR ) )
-               .filter ( tag => !/\/\s*\//.test ( tag ) ) //TODO: Should use `Tags.SEPARATOR`
+               .filter ( tag => !new RegExp ( `${Tags.SEPARATOR}\\s*${Tags.SEPARATOR}` ).test ( tag ) )
                .filter ( _.identity );
 
   }
