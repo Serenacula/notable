@@ -2,7 +2,7 @@
 /* IMPORT */
 
 import * as _ from 'lodash';
-import {MenuItem, MenuItemConstructorOptions} from 'electron';
+import {MenuItemConstructorOptions} from 'electron';
 import contextMenu from 'electron-context-menu';
 import Dialog from 'electron-dialog';
 import {is} from 'electron-util';
@@ -48,7 +48,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
   _makeMenu = ( selector: string | Function = '*', items: MenuItemConstructorOptions[] = [], itemsUpdater = _.noop ) => {
 
     contextMenu ({
-      prepend: () => items as unknown as MenuItem[], //TSC: Looks like a bug in `electron-context-menu`?
+      prepend: () => items,
       shouldShowMenu: ( event, { x, y } ) => {
 
         const ele = _.isString ( selector ) ? this._getItem ( x, y, selector ) : selector ( x, y );
@@ -247,7 +247,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
 
   /* UPDATE */
 
-  updateAttachmentMenu = ( items: MenuItem[] ) => {
+  updateAttachmentMenu = ( items: MenuItemConstructorOptions[] ) => {
 
     const fileName = $(this.ele).data ( 'filename' );
 
@@ -255,7 +255,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
 
   }
 
-  updateEditorMenu = ( items: MenuItem[] ) => {
+  updateEditorMenu = ( items: MenuItemConstructorOptions[] ) => {
 
     const canCopy = !!this.props.container.editor._getSelectedText (),
           canPaste = !!this.props.container.clipboard.get ();
@@ -266,7 +266,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
 
   }
 
-  updateNoteMenu = ( items: MenuItem[] ) => {
+  updateNoteMenu = ( items: MenuItemConstructorOptions[] ) => {
 
     const filePath = $(this.ele).data ( 'filepath' );
 
@@ -284,13 +284,13 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
 
   }
 
-  updateNoteTagMenu = ( items: MenuItem[] ) => {
+  updateNoteTagMenu = ( items: MenuItemConstructorOptions[] ) => {
 
     this.tag = $(this.ele).data ( 'tag' );
 
   }
 
-  updateTagMenu = ( items: MenuItem[] ) => {
+  updateTagMenu = ( items: MenuItemConstructorOptions[] ) => {
 
     this.tag = $(this.ele).data ( 'tag' );
 
@@ -305,7 +305,7 @@ class ContextMenu extends Component<{ container: IMain }, {}> {
 
   }
 
-  updateTrashMenu = ( items: MenuItem[] ) => {
+  updateTrashMenu = ( items: MenuItemConstructorOptions[] ) => {
 
     items[0].enabled = !this.props.container.trash.isEmpty ();
 

@@ -2,6 +2,7 @@
 /* IMPORT */
 
 import {app, BrowserWindow, dialog, ipcMain as ipc, Event, Menu, MenuItemConstructorOptions, shell} from 'electron';
+import contextMenu from 'electron-context-menu';
 import {autoUpdater as updater} from 'electron-updater';
 import {enforceMacOSAppLocation, is} from 'electron-util';
 import * as fs from 'fs';
@@ -41,7 +42,14 @@ class App {
 
   }
 
-  initContextMenu () {}
+  initContextMenu () {
+
+    contextMenu ({
+      showSaveImageAs: true,
+      showInspectElement: Environment.isDevelopment
+    });
+
+  }
 
   initDialogHandlers () {
 
