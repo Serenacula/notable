@@ -37,7 +37,7 @@ const Parser = {
 
     try {
 
-      return yaml.safeLoad ( str, Parser.options );
+      return yaml.load ( str );
 
     } catch ( e ) {
 
@@ -49,7 +49,7 @@ const Parser = {
 
   stringify ( obj: object ): string {
 
-    return yaml.safeDump ( obj, Parser.options );
+    return yaml.dump ( obj, Parser.options );
 
   }
 
