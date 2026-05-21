@@ -137,6 +137,21 @@ describe('Markdown.strip', () => {
   });
 });
 
+describe('Markdown.render — processRelativeLinks', () => {
+  it('resolves a relative attachment image to the full attachments path', () => {
+    // Before the off-by-one fix, the leading slash in the sliced segment caused
+    // path.join to treat it as absolute, producing file:///image.png instead of
+    // file:///data/attachments/image.png.
+    const html = Markdown.render('![alt](../attachments/image.png)');
+    expect(html).toContain('/data/attachments/image.png');
+  });
+
+  it('resolves a relative note link to the full notes path', () => {
+    const html = Markdown.render('[note](./other-note.md)');
+    expect(html).toContain('/data/notes/other-note.md');
+  });
+});
+
 describe('Markdown.extensions.utilities.toggleCheckbox', () => {
   const { toggleCheckbox } = Markdown.extensions.utilities;
 

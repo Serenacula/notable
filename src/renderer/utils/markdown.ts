@@ -181,9 +181,9 @@ function processRelativeLinks ( html: string ): string {
   return html.replace ( /<(a|img|source)\s([^>]*?)(src|href)="(\.[^"]*)"([^>]*)>/gm, ( match, tag, before, attr, relPath, after ) => {
     const filePath = path.resolve ( notesPath, relPath );
     if ( filePath.startsWith ( attachmentsPath ) ) {
-      return `<${tag} ${before}${attr}="${attachmentsToken}/${filePath.slice ( attachmentsPath.length )}"${after}>`;
+      return `<${tag} ${before}${attr}="${attachmentsToken}/${filePath.slice ( attachmentsPath.length + 1 )}"${after}>`;
     } else if ( filePath.startsWith ( notesPath ) ) {
-      return `<${tag} ${before}${attr}="${notesToken}/${filePath.slice ( notesPath.length )}"${after}>`;
+      return `<${tag} ${before}${attr}="${notesToken}/${filePath.slice ( notesPath.length + 1 )}"${after}>`;
     } else {
       return `<${tag} ${before}${attr}="file://${encodeFilePath ( filePath )}"${after}>`;
     }
