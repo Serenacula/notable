@@ -192,7 +192,7 @@ class Note extends Container<NoteState, MainCTX> {
 
     if ( !confirmed && !Dialog.confirm ( `Are you sure you want to permanently delete "${title}"${attachmentsUnique.length ? ` and ${attachmentsUnique.length === attachments.length ? 'all' : `${attachmentsUnique.length} out of ${attachments.length}`} attachments` : ''}?` ) ) return;
 
-    if ( await File.exists ( note.filePath ) ) File.unlink ( note.filePath );
+    if ( await File.exists ( note.filePath ) ) await File.unlink ( note.filePath );
 
     const index = this.ctx.search.getNoteIndex ( note ),
           notes = _.clone ( this.ctx.notes.get () );
@@ -336,7 +336,7 @@ class Note extends Container<NoteState, MainCTX> {
 
         attachment.fileName = fileName;
 
-        File.copy ( srcPath, dstPath );
+        await File.copy ( srcPath, dstPath );
 
       }
 
@@ -791,7 +791,7 @@ class Note extends Container<NoteState, MainCTX> {
 
         } else {
 
-          File.unlink ( note.filePath );
+          await File.unlink ( note.filePath );
 
         }
 
