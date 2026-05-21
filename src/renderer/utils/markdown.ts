@@ -3,7 +3,7 @@
 
 import * as _ from 'lodash';
 import * as CRC32 from 'crc-32';
-import {AllHtmlEntities as entities} from 'html-entities';
+import {decode as htmlDecode} from 'html-entities';
 import isAbsoluteUrl from 'is-absolute-url';
 import MarkdownIt from 'markdown-it';
 import taskLists from 'markdown-it-task-lists';
@@ -74,11 +74,11 @@ md.renderer.rules.fence = ( tokens, idx, options, env, self ) => {
   }
 
   if ( lang === 'tex' || lang === 'latex' || lang === 'katex' ) {
-    return renderKaTeX ( entities.decode ( content ), true );
+    return renderKaTeX ( htmlDecode ( content ), true );
   }
 
   if ( lang === 'asciimath' ) {
-    return renderAsciiMathToKaTeX ( entities.decode ( content ), true );
+    return renderAsciiMathToKaTeX ( htmlDecode ( content ), true );
   }
 
   const resolvedLang = (Highlighter.languagesAliases as Record<string, string>)[lang] || lang;
@@ -136,14 +136,14 @@ function processKaTeX ( html: string ): string {
   html = html.replace ( /(?:\\)?\$\$(?!<)(\S(?:.*?\S)?)(?:\\)?\$\$(?!\d)/g, ( match, tex, index ) => {
     if ( match.startsWith ( '\\' ) ) return match;
     if ( postUtils.isInsideCode ( html, index ) ) return match;
-    return renderKaTeX ( entities.decode ( tex ), true );
+    return renderKaTeX ( htmlDecode ( tex ), true );
   });
   // $...$ inline mode
   html = html.replace ( /(?:\\)?\$(?!<)(\S(?:.*?\S)?)(?:\\)?\$(?!\d)/g, ( match, tex, index ) => {
     if ( match.startsWith ( '\\' ) ) return match;
     if ( postUtils.isInsideCode ( html, index ) ) return match;
     if ( postUtils.isInsideAnchor ( html, index ) ) return match;
-    return renderKaTeX ( entities.decode ( tex ), false );
+    return renderKaTeX ( htmlDecode ( tex ), false );
   });
   // Escape cleanup
   html = html.replace ( /\\\$/g, ( match, index ) => {
@@ -161,7 +161,7 @@ function processAsciiMath ( html: string ): string {
     if ( postUtils.isInsideAnchor ( html, index ) ) return match;
     const asciimath = $1 || $2 || $3 || $4;
     const displayMode = !!$1 || !!$2;
-    return renderAsciiMathToKaTeX ( entities.decode ( asciimath ), displayMode );
+    return renderAsciiMathToKaTeX ( htmlDecode ( asciimath ), displayMode );
   });
   // Escape cleanup
   html = html.replace ( /\\&(?:amp;)?/g, ( match, index ) => {
