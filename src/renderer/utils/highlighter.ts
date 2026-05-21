@@ -54,7 +54,7 @@ const Highlighter = {
 
     if ( !Highlighter.initLanguage ( lang ) ) return str;
 
-    return Prism.highlight ( entities.decode ( str ), Prism.languages[language], language );
+    return Prism.highlight ( entities.decode ( str ), Prism.languages[lang], lang );
 
   }
 
