@@ -139,8 +139,6 @@ class Tag extends Container<TagState, MainCTX> {
 
   set = async ( tag: string ) => {
 
-    if ( !this.hasNotes ( tag ) ) tag = ALL;
-
     await this.setState ({ tag });
 
     await this.ctx.search.update ();
