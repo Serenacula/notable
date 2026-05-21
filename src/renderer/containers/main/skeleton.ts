@@ -35,16 +35,6 @@ class Skeleton extends Container<SkeletonState, MainCTX> {
 
   }
 
-  getToClipboard = async (): Promise<void> => {
-
-    const skeleton = await this.get ();
-
-    this.ctx.clipboard.set ( skeleton );
-
-    console.log ( 'Skeleton copied to the clipboard!' );
-
-  }
-
 }
 
 /* EXPORT */
