@@ -21,7 +21,10 @@
     "tutorial": "cd ./resources/tutorial && zip -FS -r ../../src/renderer/template/dist/tutorial.zip . -x '*.DS_Store'",
     "dev": "npm run svelto:prod && electron-vite dev",
     "prod": "npm run compile && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac dir && open releases/mac/*.app",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "build": {
     "appId": "com.fabiospampinato.notable",
@@ -188,6 +191,7 @@
     "@typescript-eslint/eslint-plugin": "^8.59.4",
     "@typescript-eslint/parser": "^8.59.4",
     "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^4.1.7",
     "cash-dom": "^4.1.1",
     "electron": "^42.0.0",
     "electron-builder": "^26.0.0",
@@ -204,6 +208,7 @@
     "svgicons2svgfont": "^15.0.1",
     "typescript": "^5.8.0",
     "vite": "^6.3.0",
+    "vitest": "^4.1.7",
     "wawoff2": "^2.0.1"
   }
 }
