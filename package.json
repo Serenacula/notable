@@ -174,7 +174,10 @@
   },
   "overrides": {
     "caporal": "1.3.0",
-    "gulp-if": "2.0.2"
+    "gulp-if": "2.0.2",
+    "dompurify": "^3.4.5",
+    "cross-spawn": "^7.0.6",
+    "tmp": "^0.2.5"
   },
   "devDependencies": {
     "@types/diff": "^4.0.2",
@@ -195,7 +198,7 @@
     "cash-dom": "^4.1.1",
     "electron": "^42.2.0",
     "electron-builder": "^26.0.0",
-    "electron-builder-squirrel-windows": "^20.40.0",
+    "electron-builder-squirrel-windows": "^26.11.1",
     "electron-devtools-installer": "^2.2.4",
     "electron-vite": "^3.1.0",
     "eslint": "^9.39.4",
