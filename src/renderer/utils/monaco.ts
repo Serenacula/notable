@@ -246,8 +246,6 @@ const Monaco = {
 
   initEnvironment () {
 
-    // Worker will be wired up properly when Monaco is upgraded (Phase 4).
-    // Monaco falls back to running on the main thread without a worker.
     (self as any)['MonacoEnvironment'] = {
       getWorkerUrl () {
         return URL.createObjectURL ( new Blob ( [''], { type: 'application/javascript' } ) );
@@ -299,10 +297,15 @@ const Monaco = {
 
   initTokenizers () {
 
-    LanguageMarkdown.language.tokenizer.root.shift ();
-    LanguageMarkdown.language.tokenizer.root.unshift (
-      [/^(\s{0,3})(#+)((?:[^\\#]|@escapes)+)((?:#+)?)/, ['white', 'keyword.title', 'title', 'keyword.title']],
+    const headingRuleIdx = LanguageMarkdown.language.tokenizer.root.findIndex (
+      (rule: any) => Array.isArray ( rule ) && rule[0] instanceof RegExp && /\(#\+\)/.test ( rule[0].source )
     );
+
+    if ( headingRuleIdx !== -1 ) {
+      LanguageMarkdown.language.tokenizer.root.splice ( headingRuleIdx, 1,
+        [/^(\s{0,3})(#+)((?:[^\\#]|@escapes)+)((?:#+)?)/, ['white', 'keyword.title', 'title', 'keyword.title']]
+      );
+    }
 
   },
 
